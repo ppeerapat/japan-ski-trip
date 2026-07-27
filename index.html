@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snow Country — A 10 Day Hokuriku &amp; Nagano Road Trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Antique&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* the actual colours of an overcast snow day */
+    --drift:#ffffff;
+    --paper:#eceef0;
+    --paper-2:#e2e5e8;
+    --ash:#9aa3ab;
+    --slate:#5c666f;
+    --sumi:#16191d;
+    --line:#cdd3d8;
+    /* shadowed snow — the only cool accent */
+    --glacier:#3f6f8c;
+    --glacier-pale:#dbe6ec;
+    /* 朱 vermilion — lanterns, torii, hot food. used sparingly, on purpose */
+    --shu:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--sumi);
+    font-family:'Zen Kaku Gothic New',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Zen Antique',serif;font-weight:400;}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--glacier);outline-offset:3px;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:.22em;text-transform:uppercase;
+    font-size:.66rem;color:var(--glacier);
+  }
+
+  #snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;}
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;min-height:100svh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:6rem 1.6rem 4rem;overflow:hidden;
+    background:linear-gradient(#f7f8f9 0%, var(--paper) 55%, var(--paper-2) 100%);
+  }
+  .hero .ridge{position:absolute;left:0;bottom:0;width:100%;height:min(52vh,420px);z-index:0;}
+  .hero-inner{position:relative;z-index:2;max-width:1180px;margin:0 auto;width:100%;}
+  .hero .kanji{
+    position:absolute;right:-.06em;top:-.28em;z-index:1;
+    font-family:'Zen Antique',serif;
+    font-size:clamp(11rem,34vw,26rem);line-height:.8;
+    color:var(--sumi);opacity:.045;pointer-events:none;user-select:none;
+  }
+  .hero-dates{
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500;
+    letter-spacing:.16em;color:var(--slate);
+    display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;
+  }
+  .hero-dates .bar{height:1px;width:56px;background:var(--ash);}
+  .hero h1{
+    font-size:clamp(2.9rem,9vw,6.4rem);line-height:1.02;
+    margin:1.3rem 0 0;letter-spacing:-.005em;position:relative;z-index:2;
+  }
+  .hero h1 .ln2{display:block;color:var(--glacier);}
+  .hero .sub{
+    max-width:40ch;margin:1.6rem 0 0;color:var(--slate);font-size:1.03rem;position:relative;z-index:2;
+  }
+  .hero-facts{
+    display:flex;flex-wrap:wrap;gap:0;margin-top:3rem;
+    border-top:1px solid var(--line);position:relative;z-index:2;
+  }
+  .hero-facts div{
+    padding:1rem 1.6rem 0 0;margin-right:1.6rem;border-right:1px solid var(--line);
+  }
+  .hero-facts div:last-child{border-right:0;}
+  .hero-facts .n{font-family:'Zen Antique',serif;font-size:1.9rem;display:block;line-height:1.1;}
+  .hero-facts .l{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ash);}
+
+  /* ================= SHARED SECTION ================= */
+  .wrap{max-width:1180px;margin:0 auto;width:100%;}
+  section.band{padding:5rem 1.6rem;border-top:1px solid var(--line);position:relative;z-index:2;}
+  .band-head{margin-bottom:2.6rem;}
+  .band-head h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin:.5rem 0 0;}
+  .band-head p{color:var(--slate);max-width:52ch;margin:.7rem 0 0;font-size:.94rem;}
+
+  /* ================= ROUTE MAP ================= */
+  .map-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:start;}
+  @media(max-width:900px){.map-layout{grid-template-columns:1fr;gap:2rem;}}
+
+  .map-frame{background:var(--drift);border:1px solid var(--line);padding:.6rem;}
+  .map-frame svg{width:100%;height:auto;display:block;}
+
+  .mk{cursor:pointer;}
+  .mk circle.hit{fill:transparent;}
+  .mk .dot{fill:var(--drift);stroke:var(--glacier);stroke-width:1.6;transition:.18s;}
+  .mk .lbl{font-family:'JetBrains Mono',monospace;font-size:7.5px;fill:var(--slate);
+    letter-spacing:.03em;pointer-events:none;transition:.18s;}
+  .mk:hover .dot,.mk.on .dot{fill:var(--shu);stroke:var(--shu);r:4.6;}
+  .mk:hover .lbl,.mk.on .lbl{fill:var(--sumi);font-weight:700;}
+  .mk.sleep .dot{stroke-width:2.6;}
+
+  .leg{stroke:var(--glacier);stroke-width:1.5;fill:none;stroke-linecap:round;
+    opacity:.5;transition:.18s;}
+  .leg.on{opacity:1;stroke:var(--shu);stroke-width:2.4;}
+  .contour{fill:none;stroke:var(--ash);stroke-width:.5;opacity:.32;}
+  .sea{fill:var(--glacier);opacity:.055;}
+  .sea-label{font-family:'Zen Antique',serif;font-size:11px;fill:var(--glacier);opacity:.5;
+    letter-spacing:.32em;}
+
+  /* leg table */
+  .legs{border-top:1px solid var(--line);}
+  .leg-row{
+    display:grid;grid-template-columns:2.1rem 1fr auto;gap:.8rem;align-items:baseline;
+    padding:.62rem .2rem;border-bottom:1px solid var(--line);cursor:pointer;
+    transition:background .15s;
+  }
+  .leg-row:hover,.leg-row.on{background:var(--drift);}
+  .leg-row .d{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ash);
+    letter-spacing:.06em;}
+  .leg-row.on .d{color:var(--shu);}
+  .leg-row .r{font-size:.85rem;line-height:1.35;}
+  .leg-row .v{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--slate);
+    white-space:nowrap;text-align:right;}
+  .leg-note{font-size:.74rem;color:var(--ash);margin-top:.9rem;line-height:1.5;}
+  .leg-row.heavy .v{color:var(--shu);}
+
+  /* ================= DAYS ================= */
+  .day{
+    padding:4.5rem 1.6rem;border-top:1px solid var(--line);
+    position:relative;z-index:2;
+  }
+  .day:nth-of-type(odd){background:var(--drift);}
+  .day-grid{
+    max-width:1180px;margin:0 auto;display:grid;
+    grid-template-columns:240px minmax(0,1fr) 230px;gap:2.6rem;align-items:start;
+  }
+  @media(max-width:1040px){.day-grid{grid-template-columns:200px minmax(0,1fr);}
+    .day-grid .side{grid-column:1/-1;}}
+  @media(max-width:760px){.day-grid{grid-template-columns:1fr;gap:1.5rem;}}
+
+  .day-head{position:sticky;top:2rem;}
+  @media(max-width:760px){.day-head{position:static;}}
+  .day-n{
+    font-family:'Zen Antique',serif;font-size:3.4rem;line-height:1;
+    color:var(--glacier);
+  }
+  .day-date{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;
+    color:var(--ash);text-transform:uppercase;margin:.5rem 0 .9rem;}
+  .day-head h3{font-size:1.32rem;line-height:1.3;margin:0 0 1.1rem;}
+  .day-drive{
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--slate);
+    border-left:2px solid var(--glacier);padding-left:.6rem;margin-bottom:1.1rem;
+  }
+
+  /* stay */
+  .stay{border:1px solid var(--line);background:var(--paper);padding:.85rem .9rem;}
+  .day:nth-of-type(odd) .stay{background:var(--paper);}
+  .stay .k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ash);display:block;margin-bottom:.35rem;}
+  .stay .nm{font-weight:700;font-size:.85rem;display:block;line-height:1.35;}
+  .stay .px{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--glacier);
+    display:block;margin-top:.25rem;}
+  .stay .meals{font-size:.7rem;color:var(--slate);display:block;margin-top:.15rem;}
+  .stay .lnks{display:flex;gap:.7rem;margin-top:.55rem;flex-wrap:wrap;}
+
+  .tiny{
+    font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.05em;
+    color:var(--slate);text-decoration:none;border-bottom:1px solid var(--line);
+    padding-bottom:1px;white-space:nowrap;
+  }
+  .tiny:hover{color:var(--shu);border-color:var(--shu);}
+
+  /* stops */
+  .stops{position:relative;padding-left:1.7rem;}
+  .stops::before{content:"";position:absolute;left:3px;top:.6rem;bottom:.6rem;width:1px;
+    background:var(--line);}
+  .stop{position:relative;padding:0 0 1.5rem;}
+  .stop:last-child{padding-bottom:0;}
+  .stop::before{
+    content:"";position:absolute;left:-1.7rem;top:.42rem;width:7px;height:7px;
+    border-radius:50%;background:var(--drift);border:1.5px solid var(--glacier);
+  }
+  .day:nth-of-type(odd) .stop::before{background:var(--drift);}
+  .stop.meal::before{background:var(--shu);border-color:var(--shu);}
+  /* hotel entries: hollow square, quieter than a stop */
+  .stop.hotel::before{
+    border-radius:0;background:var(--paper);border:1.5px solid var(--ash);
+    width:7px;height:7px;top:.5rem;
+  }
+  .stop.hotel .stop-x h4{font-size:.9rem;font-weight:500;color:var(--slate);}
+  .stop.hotel .stop-x p{font-size:.78rem;}
+  /* times we could not verify */
+  .guess{border-bottom:1px dotted var(--ash);cursor:help;}
+  .stay .hours{
+    font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--slate);
+    display:inline-block;margin-top:.4rem;
+  }
+  .stop-t{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:500;
+    letter-spacing:.08em;color:var(--ash);}
+  .stop.meal .stop-t{color:var(--shu);}
+  .stop-b{display:flex;gap:1.1rem;align-items:flex-start;margin-top:.15rem;}
+  .stop-x{flex:1;min-width:0;}
+  .stop-x h4{margin:0 0 .2rem;font-size:1rem;font-weight:700;}
+  .stop.meal .stop-x h4{font-size:.9rem;font-weight:500;}
+  .stop-x p{margin:0;font-size:.85rem;color:var(--slate);max-width:50ch;}
+  .stop-x .lnks{margin-top:.4rem;}
+
+  .thumb{flex:0 0 128px;width:128px;height:92px;overflow:hidden;cursor:zoom-in;
+    border:1px solid var(--line);background:var(--paper-2);position:relative;}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;
+    filter:saturate(.72) contrast(1.04);transition:filter .35s,transform .5s;}
+  .thumb:hover img{filter:saturate(1) contrast(1);transform:scale(1.05);}
+  @media(max-width:520px){.stop-b{flex-direction:column-reverse;}
+    .thumb{width:100%;flex:none;height:170px;}}
+
+  /* optional */
+  .side .opt{border-top:1px solid var(--line);padding-top:.9rem;}
+  .side .opt .k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ash);display:block;margin-bottom:.8rem;}
+  .opt-i{margin-bottom:1.1rem;}
+  .opt-i:last-child{margin-bottom:0;}
+  .opt-thumb{width:100%;flex:none;height:96px;margin-bottom:.5rem;}
+  @media(max-width:1040px){
+    .opt-thumb{width:120px;height:84px;float:left;margin:0 .8rem .3rem 0;}
+    .opt-i{display:flow-root;}
+  }
+  @media(max-width:520px){
+    .opt-thumb{width:104px;height:76px;}
+  }
+  .opt-i h5{margin:0 0 .2rem;font-size:.82rem;font-weight:700;}
+  .opt-i p{margin:0;font-size:.75rem;color:var(--slate);line-height:1.5;}
+
+  /* ================= BUDGET ================= */
+  .budget{background:var(--sumi);color:#e6e9ec;border-top:0;}
+  .budget .eyebrow{color:#8fb4c8;}
+  .budget h2{color:#fff;}
+  .budget .band-head p{color:#98a2ab;}
+
+  .bud-grid{display:grid;grid-template-columns:1fr 340px;gap:2.6rem;align-items:start;}
+  @media(max-width:900px){.bud-grid{grid-template-columns:1fr;}}
+
+  .bl{
+    display:grid;grid-template-columns:1fr 132px;gap:1rem;align-items:center;
+    padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.11);
+  }
+  .bl .nm{font-size:.92rem;font-weight:500;}
+  .bl .sb{font-size:.72rem;color:#8b959e;margin-top:.2rem;line-height:1.6;}
+  .bl input{
+    font-family:'JetBrains Mono',monospace;font-size:.95rem;
+    width:100%;text-align:right;padding:.42rem .6rem;
+    background:rgba(255,255,255,.05);color:#fff;
+    border:1px solid rgba(255,255,255,.16);border-radius:0;
+  }
+  .bl input:hover{border-color:rgba(255,255,255,.34);}
+  .bl input:focus{border-color:#8fb4c8;background:rgba(255,255,255,.09);outline:none;}
+
+  .ctl{display:flex;align-items:center;gap:.8rem;margin:1.6rem 0 .4rem;flex-wrap:wrap;}
+  .ctl .k{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;
+    text-transform:uppercase;color:#8b959e;}
+  .step{display:flex;align-items:center;border:1px solid rgba(255,255,255,.18);}
+  .step button{
+    width:32px;height:32px;background:transparent;border:0;color:#fff;cursor:pointer;
+    font-size:1rem;line-height:1;
+  }
+  .step button:hover{background:rgba(255,255,255,.1);}
+  .step .val{font-family:'JetBrains Mono',monospace;width:38px;text-align:center;font-size:.9rem;}
+
+  .totals{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.14);
+    padding:1.5rem 1.5rem 1.3rem;position:sticky;top:2rem;}
+  @media(max-width:900px){.totals{position:static;}}
+  .totals .k{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;
+    text-transform:uppercase;color:#8b959e;}
+  .totals .big{font-family:'Zen Antique',serif;font-size:2.7rem;color:#fff;line-height:1.1;
+    margin:.3rem 0 .1rem;}
+  .totals .split{margin-top:1.1rem;padding-top:1rem;border-top:1px dashed rgba(255,255,255,.16);}
+  .totals .big.alt{font-size:1.85rem;color:#c8d0d7;}
+  .totals .delta{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#8b959e;}
+  .totals .mix{margin-top:.55rem;line-height:1.5;}
+  .ctl-note{margin-top:.7rem;line-height:1.5;}
+  .totals .yen{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#8fb4c8;}
+  .totals hr{border:0;border-top:1px solid rgba(255,255,255,.13);margin:1.2rem 0;}
+  .totals .row{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.5rem;}
+  .totals .row span:last-child{font-family:'JetBrains Mono',monospace;}
+  .totals .grp{font-family:'Zen Antique',serif;font-size:1.5rem;color:#fff;}
+  .sub-calc{color:#8fb4c8;}
+  .reset{
+    margin-top:1.2rem;background:transparent;border:1px solid rgba(255,255,255,.22);
+    color:#c8d0d7;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.12em;
+    text-transform:uppercase;padding:.55rem .9rem;cursor:pointer;width:100%;
+  }
+  .reset:hover{border-color:#fff;color:#fff;}
+
+  /* ================= LIGHTBOX ================= */
+  .lb{position:fixed;inset:0;z-index:200;background:rgba(15,18,22,.94);
+    display:none;align-items:center;justify-content:center;padding:3rem 1.2rem;}
+  .lb.open{display:flex;}
+  .lb figure{margin:0;max-width:min(92vw,980px);text-align:center;}
+  .lb img{max-width:100%;max-height:78vh;display:block;margin:0 auto;}
+  .lb figcaption{color:#c8d0d7;font-family:'JetBrains Mono',monospace;font-size:.72rem;
+    letter-spacing:.1em;margin-top:1.1rem;}
+  .lb-x{position:absolute;top:1.4rem;right:1.6rem;width:40px;height:40px;
+    background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;
+    font-size:1.1rem;cursor:pointer;}
+  .lb-x:hover{background:rgba(255,255,255,.12);}
+
+  footer{background:var(--sumi);color:#7d878f;text-align:center;
+    padding:2.5rem 1.6rem 3rem;font-size:.75rem;position:relative;z-index:2;
+    border-top:1px solid rgba(255,255,255,.1);}
+  footer .display{color:#e6e9ec;font-size:1.15rem;margin-bottom:.5rem;}
+  footer p{max-width:60ch;margin:0 auto;line-height:1.6;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    #snow{display:none;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <svg class="ridge" viewBox="0 0 1440 420" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 420 V300 L150 232 L268 292 L392 186 L520 268 L636 150 L764 246 L892 172 L1024 264 L1150 196 L1290 258 L1440 214 V420 Z"
+          fill="none" stroke="#cdd3d8" stroke-width="1"/>
+    <path d="M0 420 V342 L172 292 L300 340 L438 268 L566 330 L700 254 L840 336 L980 282 L1116 340 L1258 292 L1440 336 V420 Z"
+          fill="none" stroke="#b9c1c8" stroke-width="1"/>
+    <path d="M0 420 V386 L200 352 L360 388 L520 344 L690 390 L860 350 L1030 392 L1210 352 L1440 386 V420 Z"
+          fill="#e2e5e8" stroke="#aab3ba" stroke-width="1"/>
+  </svg>
+  <div class="hero-inner">
+    <span class="kanji" aria-hidden="true">雪</span>
+    <div class="hero-dates"><span>26 FEB — 07 MAR 2027</span><span class="bar"></span><span>NGO ⇄ NGO</span></div>
+    <h1>Ten Days Through<span class="ln2">Snow Country</span></h1>
+    <p class="sub">A road trip from thatched mountain villages to salt-white coastline,
+      quiet ski fields, and a valley of bathing monkeys.</p>
+    <div class="hero-facts">
+      <div><span class="n" id="fDays">10</span><span class="l">Days</span></div>
+      <div><span class="n">6</span><span class="l">Prefectures</span></div>
+      <div><span class="n" id="fNights">9</span><span class="l">Nights · 6 Beds</span></div>
+      <div><span class="n" id="fKm">—</span><span class="l">km Driving, est.</span></div>
+      <div><span class="n">6</span><span class="l">Travellers</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ROUTE MAP ============ -->
+<section class="band" id="route">
+  <div class="wrap">
+    <div class="band-head">
+      <div class="eyebrow">The Route</div>
+      <h2>One long loop, anticlockwise</h2>
+      <p>Nagoya up into the Hida mountains, down to the Toyama Bay coast, east along the
+        Sea of Japan, back up into Myōkō and Nagano, then the long run south to the airport.
+        Tap a leg to trace it.</p>
+    </div>
+    <div class="map-layout">
+      <div class="map-frame">
+        <svg id="mapSvg" role="img" aria-label="Route map of the trip"></svg>
+      </div>
+      <div>
+        <div class="legs" id="legs"></div>
+        <p class="leg-note" id="legNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DAYS ============ -->
+<div id="days"></div>
+
+<!-- ============ BUDGET ============ -->
+<section class="band budget" id="budget">
+  <div class="wrap">
+    <div class="band-head">
+      <div class="eyebrow">The Numbers</div>
+      <h2>What it costs, and who pays</h2>
+      <p>Every figure below is editable — change an amount and the totals follow.
+        Accommodation is pre-filled from the six confirmed bookings. Treat this as a
+        planning number, not a quote.</p>
+    </div>
+    <div class="bud-grid">
+      <div>
+        <div id="budLines"></div>
+        <div class="ctl">
+          <span class="k">Travellers</span>
+          <div class="step">
+            <button type="button" id="pplDown" aria-label="Fewer travellers">−</button>
+            <span class="val mono" id="pplVal">6</span>
+            <button type="button" id="pplUp" aria-label="More travellers">+</button>
+          </div>
+          <span class="k">Of those, skiing</span>
+          <div class="step">
+            <button type="button" id="skiDown" aria-label="Fewer skiers">−</button>
+            <span class="val mono" id="skiVal">6</span>
+            <button type="button" id="skiUp" aria-label="More skiers">+</button>
+          </div>
+        </div>
+        <div class="ctl-note k" id="pplHint"></div>
+      </div>
+      <aside class="totals">
+        <span class="k">Per person, skiing</span>
+        <div class="big" id="tPP">—</div>
+        <div class="split">
+          <span class="k">Per person, not skiing</span>
+          <div class="big alt" id="tPPNoSki">—</div>
+          <div class="delta" id="tDelta"></div>
+        </div>
+        <hr>
+        <div class="row"><span>Shared costs, split</span><span id="tShared">—</span></div>
+        <div class="row"><span>Everyone pays</span><span id="tIndiv">—</span></div>
+        <div class="row"><span>Skiers also pay</span><span id="tSki">—</span></div>
+        <hr>
+        <div class="row" style="align-items:baseline;">
+          <span class="k">Group total</span><span class="grp" id="tGroup">—</span>
+        </div>
+        <div class="mix k" id="tMix"></div>
+        <button class="reset" type="button" id="reset">Reset to defaults</button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="display">気をつけて — safe travels</div>
+  <p>Distances and drive times are straight-line estimates scaled for road routing, not
+    turn-by-turn directions — check them against a live map before you set off.
+    Reference photos via Wikimedia Commons under their Creative Commons / public-domain licences.</p>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo">
+  <button class="lb-x" id="lbX" aria-label="Close photo">✕</button>
+  <figure><img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption></figure>
+</div>
+
+<script>
+/* ============================================================
+   PLACES — real coordinates, used for the map and for map links
+   ============================================================ */
+const P = {
+  ngo:   { n:"Chubu Centrair Airport",      lat:34.857362, lng:136.810756, pid:"ChIJzynM7ZN9BGARJQAsbih9mEI" },
+  sanm:  { n:"Sanmachi Suji, Takayama",     lat:36.141316, lng:137.259623, pid:"ChIJczG1tNu6AmARjrgU-Yh3zH8" },
+  jinya: { n:"Takayama Jinya",              lat:36.139631, lng:137.257604, pid:"ChIJj29EXtm6AmAR4ZH1chH39Zg" },
+  hida:  { n:"Hida no Sato Folk Village",   lat:36.132490, lng:137.235090, pid:"ChIJmWTYrzm7AmARRPwmwmCypNY" },
+  ropw:  { n:"Shinhotaka Ropeway",          lat:36.285792, lng:137.575262, pid:"ChIJLUAe875PHWARkR1e5ffwR9k" },
+  ogi:   { n:"Ogimachi, Shirakawa-go",      lat:36.263464, lng:136.927472, pid:"ChIJddsKEIZx-F8R2SWCJfgjcu4" },
+  aino:  { n:"Ainokura, Gokayama",          lat:36.426006, lng:136.935478, pid:"ChIJseVkTg4W-F8RegJ6zJErGlU" },
+  kansui:{ n:"Kansui Park, Toyama",         lat:36.709377, lng:137.212433, pid:"ChIJMa0Onwya918R8_ZU2ohNK6I" },
+  amah:  { n:"Amaharashi Coast",            lat:36.814869, lng:137.042059, pid:"ChIJlyjSYMN3918RQqyPz0H5ECo" },
+  himi:  { n:"Himi Banya-gai",              lat:36.864369, lng:136.987247, pid:"ChIJfWOETEhy918RgC65Wd6gwFU" },
+  tcas:  { n:"Toyama Castle",               lat:36.692700, lng:137.211615, pid:"ChIJE0W4wG2R918R1fUdNadDRiQ" },
+  glass: { n:"Toyama Glass Art Museum",     lat:36.688416, lng:137.215186, pid:"ChIJSU90xaaC918RX-cV13mPXwc" },
+  asahi: { n:"Asahi, Toyama",               lat:36.947466, lng:137.561725, pid:"ChIJEbE1xNyy918RjMovwy4LrhE" },
+  ssv:   { n:"Itoigawa Seaside Valley",     lat:36.941070, lng:137.899238, pid:"ChIJYU1_Ry1E9l8R0KuSGMCYNr0" },
+  umi:   { n:"Jōetsu Aquarium Umigatari",   lat:37.173471, lng:138.233013, pid:"ChIJERnhuG549l8RvXtmepwiWBM" },
+  akak:  { n:"Akakura Onsen, Myōkō",        lat:36.891469, lng:138.177443, pid:"ChIJ_3X4Les99l8R-IA-SwX6Owo" },
+  akski: { n:"Akakura Onsen Ski Area",      lat:36.890901, lng:138.176707, pid:"ChIJtX3mXOw99l8RnkTL9LS2KEQ" },
+  sugi:  { n:"Myōkō Suginohara Ski Resort", lat:36.856923, lng:138.155070, pid:"ChIJJ8D2Bo489l8R65pouJE5Z2Q" },
+  jigo:  { n:"Jigokudani Monkey Park",      lat:36.732686, lng:138.462136, pid:"ChIJzyCiTOzzHWARH9aN73OLTfY" },
+  shibu: { n:"Shibu Onsen",                 lat:36.733702, lng:138.433359, pid:"ChIJQyBBLIL0HWARtNenAnQzISA" },
+  mcas:  { n:"Matsumoto Castle",            lat:36.238653, lng:137.968867, pid:"ChIJmVmaCoUOHWARVPa8-iAOLZA" },
+  rinku: { n:"J Hotel Rinku",               lat:34.879109, lng:136.828561, pid:"ChIJ7aVdZFeHBGAR0OcWCBGX-yU" }
+};
+
+/* Google Maps link — prefers the exact place, falls back to a name search */
+function gmap(key){
+  const p = P[key];
+  if(!p) return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(key);
+  let u = 'https://www.google.com/maps/search/?api=1&query=' + p.lat + ',' + p.lng;
+  if(p.pid) u += '&query_place_id=' + p.pid;
+  return u;
+}
+function gsearch(q){
+  return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+}
+
+/* ============================================================
+   DISTANCE — great circle, scaled to approximate real road length
+   ============================================================ */
+const ROAD_FACTOR = 1.38;   // roads are not straight lines
+const AVG_KMH     = 65;     // winter, mix of expressway and mountain road
+
+function haversine(a,b){
+  const R=6371, rad=Math.PI/180;
+  const dLat=(b.lat-a.lat)*rad, dLng=(b.lng-a.lng)*rad;
+  const la=a.lat*rad, lb=b.lat*rad;
+  const h=Math.sin(dLat/2)**2 + Math.cos(la)*Math.cos(lb)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+/* overrideKm: use where the direct line crosses mountains the road has to go around,
+   and the great-circle estimate would be badly wrong */
+function legStats(keys, overrideKm){
+  let km = 0;
+  if(overrideKm){
+    km = overrideKm;
+  } else {
+    for(let i=0;i<keys.length-1;i++) km += haversine(P[keys[i]], P[keys[i+1]]);
+    km *= ROAD_FACTOR;
+  }
+  const hrs = km/AVG_KMH;
+  const h=Math.floor(hrs), m=Math.round((hrs-h)*60);
+  return { km:Math.round(km), h, m, label:(h?h+'h':'') + (m?' '+m+'m':(h?'':'0m')) };
+}
+
+/* ============================================================
+   STAYS
+   ============================================================ */
+/* ci / co: NONE of these are confirmed. They are the standard defaults for each
+   property type in Japan. Verify against your booking and correct here. */
+const STAYS = {
+  "Hidasumika Machiya Sakurayama": { price:2248.33, nights:2, meals:null,
+    ci:"15:00", co:"10:00", assumed:true,
+    link:"https://www.booking.com/hotel/jp/hidasumika-machiya-sakurayama.en-gb.html",
+    q:"Hidasumika Machiya Sakurayama Takayama" },
+  "Super Hotel Toyama Premier": { price:1407.50, nights:1, meals:"Breakfast",
+    ci:"15:00", co:"10:00", assumed:true,
+    link:"https://www.toyamashi-kankoukyoukai.jp/en/stay/super-hotel-premier-toyama-castle-park-front/",
+    q:"Super Hotel Premier Toyama Castle Park Front" },
+  "Ocean View House, Asahi": { price:2729.67, nights:2, meals:null,
+    ci:"16:00", co:"10:00", assumed:true,
+    link:"https://www.airbnb.com/rooms/1334443653214454778",
+    q:"Asahi Toyama" },
+  // NOTE: this link was a duplicate of Ocean View House in the previous draft.
+  // Replace with the real Myōkō listing URL.
+  "170㎡ Myōkō House": { price:4040.83, nights:2, meals:null,
+    ci:"16:00", co:"10:00", assumed:true,
+    link:null, q:"Akakura Onsen Myoko" },
+  "Hotel Housei, Shibu Onsen": { price:2678.83, nights:1, meals:"Breakfast + dinner",
+    ci:"15:00", co:"10:00", assumed:true,
+    link:"https://www.snowmonkeyresorts.com/hotels/hotel-housei/",
+    q:"Hotel Housei Shibu Onsen" },
+  "J Hotel Rinku": { price:1500.00, nights:1, meals:null,
+    ci:"15:00", co:"12:00", assumed:true,
+    link:null, pkey:"rinku", q:"J Hotel Rinku Tokoname" }
+};
+
+/* ============================================================
+   ITINERARY
+   ============================================================ */
+const DAYS = [
+{
+  num:"01", date:"26 Feb · Fri", title:"Arrive Nagoya, drive to Takayama",
+  stay:"Hidasumika Machiya Sakurayama", route:["ngo","sanm"], ciBefore:"Takayama Old Town",
+  stops:[
+    { t:"10:30", n:"Land at Centrair (XJ638)", p:"Clear customs, pick up the rental car, head north.", m:"ngo" },
+    { t:"12:00", n:"North into the Hida mountains", p:"Roughly two and a half hours up from the coast plain." },
+    { t:"13:00", n:"Lunch", meal:true, p:"Hida beef curry, or a bento from a Gifu expressway service area." },
+    { t:"15:30", n:"Takayama Old Town", p:"Edo-period lanes, sake breweries, an evening walk before the cold sets in.", m:"sanm",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Hida_Takayama_old_town_streets_(48519370292).jpg?width=700",
+      cap:"Takayama Old Town" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Hida beef yakiniku, or a sansai mountain-vegetable set." }
+  ],
+  opt:[{ n:"Sanmachi sake brewery tasting", p:"Several old breweries in the old town pour tastings into the early evening." }]
+},
+{
+  num:"02", date:"27 Feb · Sat", title:"Takayama, on foot",
+  stay:"Hidasumika Machiya Sakurayama", route:[],
+  stops:[
+    { t:"09:00", n:"Miyagawa Morning Market", p:"Riverside stalls — pickles, local produce, crafts. Winds down around noon, so it has to be the morning.", q:"Miyagawa Morning Market Takayama" },
+    { t:"12:00", n:"Lunch", meal:true, p:"Takayama ramen — a light soy broth, nothing like the Hida beef places nearby." },
+    { t:"13:30", n:"Takayama Jinya", p:"The last surviving Edo-period provincial government house in Japan. Closes at 16:30, so it goes first.", m:"jinya" },
+    { t:"15:00", n:"Hida no Sato Folk Village", p:"Thatched farmhouses relocated into an open-air village museum, ten minutes west of town. Open until 17:00 — that leaves a comfortable two hours.", m:"hida" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Izakaya-style Hida beef skewers with a local junmai." }
+  ],
+  opt:[
+    { n:"Sakurayama Hachimangū and the Yatai Kaikan", p:"Fills the gap between the market and lunch. The float hall keeps four of the festival floats on display through the winter.", q:"Takayama Yatai Kaikan Festival Floats Hall" },
+    { n:"Shinhotaka Ropeway", p:"Double-decker cable car into the Northern Alps, about an hour east. A half-day trip in itself, and it closes in high wind.", m:"ropw" }
+  ]
+},
+{
+  num:"03", date:"28 Feb · Sun", title:"Shirakawa-gō, Ainokura, Toyama",
+  stay:"Super Hotel Toyama Premier", route:["sanm","ogi","aino","kansui"],
+  stops:[
+    { t:"09:00", n:"Ogimachi, Shirakawa-gō", p:"The largest surviving cluster of gasshō-zukuri thatched farmhouses in Japan.", m:"ogi",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Shirakawa_Gassho-zukuri_49.jpg?width=700",
+      cap:"Shirakawa-gō" },
+    { t:"12:00", n:"Lunch", meal:true, p:"Gohei-mochi grilled rice skewers, or soba near Ogimachi." },
+    { t:"13:30", n:"Ainokura, Gokayama", p:"Same architecture, a fraction of the crowds.", m:"aino",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Ainokura_in_Gokayama_area.jpg?width=700",
+      cap:"Ainokura" },
+    { t:"16:00", n:"Kansui Park, Toyama", p:"Evening walk along the Fugan Canal.", m:"kansui",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Starbucks_Toyama_Kansui_park.jpg?width=700",
+      cap:"Kansui Park, Toyama" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Shiroebi white-shrimp sushi, or a bowl of Toyama black ramen." }
+  ],
+  opt:[{ n:"Gokayama washi papermaking", p:"Hands-on traditional papermaking workshop a few minutes from Ainokura." }]
+},
+{
+  num:"04", date:"1 Mar · Mon", title:"The coast day: Amaharashi to Asahi",
+  stay:"Ocean View House, Asahi", route:["kansui","amah","himi","glass","asahi"],
+  heavy:true,
+  stops:[
+    { t:"09:00", n:"Amaharashi Coast", p:"Pine-lined shore with the Tateyama range standing across the bay — on a clear day.", m:"amah",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Amaharashi_Coast_20190429.jpg?width=700",
+      cap:"Amaharashi Coast" },
+    { t:"12:00", n:"Himi Banya-gai", p:"Fish market and food hall on Toyama Bay. Free foot-bath outside.", m:"himi",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Himi_port.jpg?width=700",
+      cap:"Himi fishing port" },
+    { t:"12:30", n:"Lunch", meal:true, p:"Kaisen-don at the market, or hotaruika firefly squid if the season has started." },
+    { t:"14:30", n:"Toyama Glass Art Museum", p:"Contemporary glass inside a Kengo Kuma building shared with the city library.", m:"glass",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Toyama_Glass_Art_Museum_Entrance_2017.JPG?width=700",
+      cap:"Toyama Glass Art Museum" },
+    { t:"17:00", n:"East to Asahi", p:"Settle in for two nights on the coast. Sunset is around 17:45 — the tail of this drive is in the dark.", m:"asahi" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Grilled fish or a nabe hot pot in Asahi." }
+  ],
+  opt:[
+    { n:"Toyama Castle", p:"Reconstructed keep in the old castle park, five minutes from the glass museum. Easy to add if you're running ahead.", m:"tcas",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Toyama_Castle.jpg?width=500",
+      cap:"Toyama Castle" },
+    { n:"Southern Noto Peninsula loop", p:"Adds roughly two hours of coastal driving. Only works if you skip Toyama city entirely." }
+  ]
+},
+{
+  num:"05", date:"2 Mar · Tue", title:"Ski day: Itoigawa Seaside Valley",
+  stay:"Ocean View House, Asahi", route:["asahi","ssv","asahi"],
+  stops:[
+    { t:"09:00", n:"Itoigawa Seaside Valley", p:"A small local hill with a single long lift, reliable powder, and the Sea of Japan below you on a clear run.", m:"ssv" },
+    { t:"12:30", n:"Lunch", meal:true, p:"Lodge curry rice or ramen at the resort restaurant." },
+    { t:"16:30", n:"Back to Asahi", p:"Second night on the coast." },
+    { t:"19:00", n:"Dinner", meal:true, p:"Home-style cooking, or more coastal seafood." }
+  ],
+  opt:[{ n:"Fossa Magna Museum, Itoigawa", p:"Geology museum built around the region's jade. A good non-ski afternoon." }]
+},
+{
+  num:"06", date:"3 Mar · Wed", title:"Along the coast, then up to Myōkō",
+  stay:"170㎡ Myōkō House", route:["asahi","umi","akak"],
+  stops:[
+    { t:"09:00", n:"Leave Asahi", p:"Coastal road east toward Jōetsu." },
+    { t:"10:00", n:"Jōetsu Aquarium Umigatari", p:"Sea-of-Japan aquarium with a dolphin pool that looks straight out at the actual sea.", m:"umi",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Joetsu_Aquarium_Umigatari.jpg?width=700",
+      cap:"Jōetsu Aquarium Umigatari" },
+    { t:"12:30", n:"Lunch", meal:true, p:"Jōetsu seafood, or local soba on the way out of town." },
+    { t:"13:30", n:"Climb to Myōkō", p:"Off the coast and into the mountains for two nights.", m:"akak",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Mt_Myoko_-_panoramio.jpg?width=700",
+      cap:"Mount Myōkō" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Cook at the house — Niigata rice and vegetables from the local michi-no-eki." }
+  ],
+  opt:[]
+},
+{
+  num:"07", date:"4 Mar · Thu", title:"Ski day in Myōkō",
+  stay:"170㎡ Myōkō House", route:[],
+  stops:[
+    { t:"08:30", n:"Akakura Onsen Ski Area", p:"First lifts. Mostly beginner and intermediate terrain, and the joint pass with neighbouring Akakura Kanko opens up the steeper runs for about ¥1,000 more.", m:"akski",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Akakura_onsen_ski_resort_(49819015158).jpg?width=700",
+      cap:"Akakura Onsen ski area" },
+    { t:"12:30", n:"Lunch", meal:true, p:"On the mountain — lodge curry, or Nagano soba and oyaki at the base village." },
+    { t:"15:30", n:"Onsen at the bottom of the run", p:"Akakura is a hot spring village first and a ski hill second. The baths are a two-minute walk from the last lift.", m:"akak" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Home cooking at the house, or a local izakaya if anyone wants a night out." }
+  ],
+  opt:[
+    { n:"Myōkō Suginohara instead", p:"Fifteen minutes south. One gondola, almost no lift queues, and an 8.5 km top-to-bottom run — the longest in Japan.", m:"sugi" },
+    { n:"Skip the skiing", p:"A slower day of onsen-hopping and cafés around Myōkō village." }
+  ]
+},
+{
+  num:"08", date:"5 Mar · Fri", title:"Myōkō to Shibu Onsen, via the monkeys",
+  stay:"Hotel Housei, Shibu Onsen", route:["akak","jigo","shibu"], roadKm:75,
+  stops:[
+    { t:"08:00", n:"Leave the Myōkō house", p:"Check out and head east. The direct mountain road is shut in winter, so it's a loop round on the Jōshin-etsu expressway via Shinshū-Nakano — closer to an hour and a half than the map suggests.", m:"akak" },
+    { t:"09:30", n:"Jigokudani Monkey Park", p:"Wild macaques in their own hot spring. It's a 1.6 km walk in from the car park — packed snow and ice the whole way, so bring grips.", m:"jigo",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Snow_Monkeys,_Nagano,_Japan.JPG?width=700",
+      cap:"Jigokudani Monkey Park" },
+    { t:"12:30", n:"Lunch", meal:true, p:"Nagano soba around Yudanaka, five minutes back down the hill from the park." },
+    { t:"14:30", n:"Shibu Onsen", p:"Ten minutes on from the park. Lantern-lit hot spring town of nine public bathhouses — check in, change into a yukata.", m:"shibu",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Shibu_Onsen.jpg?width=700",
+      cap:"Shibu Onsen" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Included at Hotel Housei — a kaiseki-style ryokan dinner." }
+  ],
+  opt:[{ n:"The nine-bathhouse stamp rally", p:"Shibu's tradition: tour all nine public baths in yukata in one evening. Guests of the ryokan get the key to all nine." }]
+},
+{
+  num:"09", date:"6 Mar · Sat", title:"Matsumoto, then the long run south",
+  stay:"J Hotel Rinku", route:["shibu","mcas","rinku"], roadKm:390,
+  heavy:true,
+  stops:[
+    { t:"09:00", n:"Leave Shibu", p:"Highway south toward Matsumoto." },
+    { t:"10:00", n:"Matsumoto Castle", p:"One of Japan's twelve original keeps — black-walled, moated, and genuinely old inside.", m:"mcas",
+      img:"https://commons.wikimedia.org/wiki/Special:FilePath/MatsumotoCastle.jpg?width=700",
+      cap:"Matsumoto Castle" },
+    { t:"12:30", n:"Lunch", meal:true, p:"Shinshū soba near the castle." },
+    { t:"14:00", n:"South to Rinku", p:"The longest single drive of the trip. J Hotel Rinku is one train stop from the terminal, with an Aeon Mall next door.", m:"rinku" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Something easy at the mall next door — a last casual meal before flying." }
+  ],
+  opt:[{ n:"Nakamachi merchant street", p:"Matsumoto's white-walled kura warehouse district. Good coffee, slow wander." }]
+},
+{
+  num:"10", date:"7 Mar · Sun", title:"Return the car, fly home",
+  stay:null, route:[],
+  stops:[
+    { t:"08:00", n:"Drop the rental car", p:"Ten minutes from Rinku to the return desk at Centrair.", m:"ngo" },
+    { t:"10:30", n:"XJ639 — wheels up", p:"Ten days, six prefectures, a great deal of snow." }
+  ],
+  opt:[]
+}
+];
+
+/* ============================================================
+   RENDER DAYS
+   ============================================================ */
+const daysWrap = document.getElementById('days');
+
+function mapLink(s){
+  if(s.m) return `<a class="tiny" href="${gmap(s.m)}" target="_blank" rel="noopener">Map ↗</a>`;
+  if(s.q) return `<a class="tiny" href="${gsearch(s.q)}" target="_blank" rel="noopener">Map ↗</a>`;
+  return '';
+}
+
+DAYS.forEach((d, i) => {
+  const sec = document.createElement('section');
+  sec.className = 'day';
+  sec.id = 'day-' + d.num;
+
+  const drive = d.route.length > 1 ? legStats(d.route, d.roadKm) : null;
+  d._drive = drive;
+
+  /* ---- hotel entries, derived from where the stay changes ----
+     Check-out is a deadline on the morning, so it opens the day regardless of
+     clock time. Check-in is an earliest-possible, so it sits just before dinner —
+     which is when you actually get there on every day of this trip. */
+  const prevStay = i > 0 ? DAYS[i-1].stay : null;
+  const seq = [];
+
+  if(prevStay && prevStay !== d.stay){
+    const v = STAYS[prevStay];
+    seq.push({ hotel:'out', stay:prevStay, t:'By ' + v.co, assumed:v.assumed });
+  }
+
+  const timed = [...d.stops];
+  if(d.stay && d.stay !== prevStay){
+    const v = STAYS[d.stay];
+    const entry = { hotel:'in', stay:d.stay, t:'From ' + v.ci, assumed:v.assumed };
+    let at = -1;
+    if(d.ciBefore){
+      at = timed.findIndex(s => s.n === d.ciBefore);
+    }
+    if(at < 0){
+      for(let k = timed.length-1; k >= 0; k--){ if(timed[k].meal){ at = k; break; } }
+    }
+    if(at >= 0) timed.splice(at, 0, entry); else timed.push(entry);
+  }
+  seq.push(...timed);
+
+  const stops = seq.map(s => {
+    if(s.hotel){
+      const v = STAYS[s.stay];
+      const nights = v.nights > 1 ? v.nights + ' nights' : '1 night';
+      return `
+    <div class="stop hotel">
+      <div class="stop-t${s.assumed ? ' guess' : ''}">${s.t}</div>
+      <div class="stop-b">
+        <div class="stop-x">
+          <h4>${s.hotel === 'in' ? 'Check in' : 'Check out'} — ${s.stay}</h4>
+          <p>${s.hotel === 'in'
+              ? nights + (v.meals ? ', ' + v.meals.toLowerCase() + ' included' : '')
+              : 'Bags in the car before you set off.'}</p>
+          ${s.hotel === 'in'
+            ? `<div class="lnks">
+                 ${v.link ? `<a class="tiny" href="${v.link}" target="_blank" rel="noopener">Listing ↗</a>` : ''}
+                 <a class="tiny" href="${v.pkey ? gmap(v.pkey) : gsearch(v.q)}" target="_blank" rel="noopener">Map ↗</a>
+               </div>` : ''}
+        </div>
+      </div>
+    </div>`;
+    }
+    return `
+    <div class="stop${s.meal ? ' meal' : ''}">
+      <div class="stop-t">${s.t}</div>
+      <div class="stop-b">
+        <div class="stop-x">
+          <h4>${s.n}</h4>
+          <p>${s.p}</p>
+          ${mapLink(s) ? `<div class="lnks">${mapLink(s)}</div>` : ''}
+        </div>
+        ${s.img ? `<div class="thumb" data-img="${s.img}" data-cap="${s.cap || s.n}">
+          <img src="${s.img}" alt="${s.cap || s.n}" loading="lazy"
+               onerror="this.closest('.thumb').remove()"></div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  const stay = d.stay ? (() => {
+    const v = STAYS[d.stay];
+    return `<div class="stay">
+      <span class="k">Tonight</span>
+      <span class="nm">${d.stay}</span>
+      <span class="px">฿${Math.round(v.price).toLocaleString()} pp · ${v.nights} night${v.nights>1?'s':''}</span>
+      ${v.meals ? `<span class="meals">${v.meals} included</span>` : ''}
+      <span class="hours${v.assumed ? ' guess' : ''}">In ${v.ci} · Out ${v.co}</span>
+      <span class="lnks">
+        ${v.link ? `<a class="tiny" href="${v.link}" target="_blank" rel="noopener">Listing ↗</a>` : ''}
+        <a class="tiny" href="${v.pkey ? gmap(v.pkey) : gsearch(v.q)}" target="_blank" rel="noopener">Map ↗</a>
+      </span>
+    </div>`;
+  })() : '';
+
+  const opt = d.opt.length ? `<div class="opt"><span class="k">If time allows</span>
+    ${d.opt.map(o => `<div class="opt-i">
+      ${o.img ? `<div class="thumb opt-thumb" data-img="${o.img}" data-cap="${o.cap || o.n}">
+        <img src="${o.img}" alt="${o.cap || o.n}" loading="lazy"
+             onerror="this.closest('.thumb').remove()"></div>` : ''}
+      <h5>${o.n}</h5><p>${o.p}</p>
+      ${mapLink(o) ? `<div class="lnks" style="margin-top:.35rem">${mapLink(o)}</div>` : ''}
+    </div>`).join('')}</div>` : '';
+
+  sec.innerHTML = `
+    <div class="day-grid">
+      <div class="day-head">
+        <div class="eyebrow">Day</div>
+        <div class="day-n">${d.num}</div>
+        <div class="day-date">${d.date}</div>
+        <h3>${d.title}</h3>
+        ${drive ? `<div class="day-drive">${drive.km} km · ${drive.label} driving, est.</div>` : ''}
+        ${stay}
+      </div>
+      <div class="stops">${stops}</div>
+      <div class="side">${opt}</div>
+    </div>`;
+  daysWrap.appendChild(sec);
+});
+
+/* ============================================================
+   ROUTE MAP
+   ============================================================ */
+(function buildMap(){
+  const svg = document.getElementById('mapSvg');
+  const keys = Object.keys(P);
+  const lats = keys.map(k=>P[k].lat), lngs = keys.map(k=>P[k].lng);
+  const latMin=Math.min(...lats), latMax=Math.max(...lats);
+  const lngMin=Math.min(...lngs), lngMax=Math.max(...lngs);
+  const kx = Math.cos((latMin+latMax)/2 * Math.PI/180);
+
+  const PAD = { t:34, r:96, b:30, l:34 };
+  const W = 620;
+  const spanX = (lngMax-lngMin)*kx, spanY = (latMax-latMin);
+  const innerW = W - PAD.l - PAD.r;
+  const scale = innerW / spanX;
+  const innerH = spanY * scale;
+  const H = innerH + PAD.t + PAD.b;
+
+  const x = lng => PAD.l + (lng-lngMin)*kx*scale;
+  const y = lat => PAD.t + (latMax-lat)*scale;
+
+  svg.setAttribute('viewBox', `0 0 ${Math.round(W)} ${Math.round(H)}`);
+
+  const parts = [];
+
+  /* sea wash on the Sea of Japan side of the coastal run */
+  const coast = ['himi','amah','kansui','asahi','ssv','umi'];
+  const cpts = coast.map(k=>`${x(P[k].lng).toFixed(1)},${y(P[k].lat).toFixed(1)}`);
+  parts.push(`<path class="sea" d="M ${x(P.himi.lng)-70},${y(P.himi.lat)+40}
+    L ${cpts.join(' L ')} L ${x(P.umi.lng)+60},${y(P.umi.lat)-70}
+    L ${x(P.umi.lng)+60},${PAD.t-34} L ${x(P.himi.lng)-70},${PAD.t-34} Z"/>`);
+  parts.push(`<text class="sea-label" x="${x(P.amah.lng)-14}" y="${y(P.amah.lat)-34}"
+    text-anchor="end">日本海</text>`);
+
+  /* contour rings over the two real highland masses on the route */
+  [['ropw',5],['akak',4]].forEach(([k,n])=>{
+    const cx=x(P[k].lng), cy=y(P[k].lat);
+    for(let i=1;i<=n;i++){
+      const r = i*13;
+      parts.push(`<ellipse class="contour" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}"
+        rx="${(r*1.28).toFixed(1)}" ry="${r.toFixed(1)}"
+        transform="rotate(${k==='ropw'?-24:16} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`);
+    }
+  });
+
+  /* one polyline per day that has a drive */
+  DAYS.forEach(d=>{
+    if(d.route.length<2) return;
+    const pts = d.route.map(k=>`${x(P[k].lng).toFixed(1)},${y(P[k].lat).toFixed(1)}`).join(' ');
+    parts.push(`<polyline class="leg" data-day="${d.num}" points="${pts}"/>`);
+  });
+
+  /* markers — dedupe, note which are overnight stops */
+  const sleepKeys = new Set(['sanm','kansui','asahi','akak','shibu','ngo']);
+  const seen = new Set();
+  DAYS.forEach(d=>d.route.forEach(k=>{
+    if(seen.has(k)) return;
+    seen.add(k);
+    const px=x(P[k].lng), py=y(P[k].lat);
+    const right = px < W*0.62;
+    parts.push(`<g class="mk${sleepKeys.has(k)?' sleep':''}" data-k="${k}" tabindex="0" role="button"
+        aria-label="${P[k].n}">
+      <circle class="hit" cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="13"/>
+      <circle class="dot" cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="3.4"/>
+      <text class="lbl" x="${(px + (right?8:-8)).toFixed(1)}" y="${(py+2.8).toFixed(1)}"
+        text-anchor="${right?'start':'end'}">${P[k].n}</text>
+    </g>`);
+  }));
+
+  svg.innerHTML = parts.join('\n');
+
+  /* ---- leg table ---- */
+  const legsEl = document.getElementById('legs');
+  let totalKm = 0;
+  const rows = DAYS.filter(d=>d._drive).map(d=>{
+    totalKm += d._drive.km;
+    const from = P[d.route[0]].n.split(',')[0];
+    const to   = P[d.route[d.route.length-1]].n.split(',')[0];
+    return `<div class="leg-row${d.heavy?' heavy':''}" data-day="${d.num}" tabindex="0" role="button">
+      <span class="d">D${d.num}</span>
+      <span class="r">${from} → ${to}</span>
+      <span class="v">${d._drive.km} km · ${d._drive.label}</span>
+    </div>`;
+  });
+  legsEl.innerHTML = rows.join('');
+
+  const restDays = DAYS.length - DAYS.filter(d=>d._drive).length;
+  document.getElementById('legNote').textContent =
+    `≈ ${totalKm.toLocaleString()} km total, spread over ${DAYS.length - restDays} driving days. `
+    + `Days 4 and 9 are the heavy ones — Day 9 alone is more than a third of the trip's distance, `
+    + `and sunset in early March is around 17:45.`;
+  document.getElementById('fKm').textContent = Math.round(totalKm/10)*10;
+
+  function goDay(num){
+    document.getElementById('day-'+num)?.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  /* ---- interaction: link table ⇄ map ⇄ day sections ---- */
+  const setDay = (num, on) => {
+    svg.querySelectorAll(`.leg[data-day="${num}"]`).forEach(el=>el.classList.toggle('on', on));
+    legsEl.querySelectorAll(`.leg-row[data-day="${num}"]`).forEach(el=>el.classList.toggle('on', on));
+    const d = DAYS.find(x=>x.num===num);
+    if(!d) return;
+    d.route.forEach(k=>
+      svg.querySelectorAll(`.mk[data-k="${k}"]`).forEach(el=>el.classList.toggle('on', on)));
+  };
+
+  legsEl.querySelectorAll('.leg-row').forEach(row=>{
+    const num = row.dataset.day;
+    row.addEventListener('mouseenter', ()=>setDay(num,true));
+    row.addEventListener('mouseleave', ()=>setDay(num,false));
+    row.addEventListener('focus',      ()=>setDay(num,true));
+    row.addEventListener('blur',       ()=>setDay(num,false));
+    const go = ()=>goDay(num);
+    row.addEventListener('click', go);
+    row.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
+  });
+
+  svg.querySelectorAll('.mk').forEach(mk=>{
+    const k = mk.dataset.k;
+    const owner = DAYS.find(d=>d.route.includes(k));
+    const go = ()=>{ if(owner) goDay(owner.num); };
+    mk.addEventListener('click', go);
+    mk.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
+  });
+
+})();
+
+/* ============================================================
+   BUDGET — everything editable
+   ============================================================ */
+const ACCOM = Object.values(STAYS).reduce((s,v)=>s+v.price, 0);
+const TRIP_DAYS = DAYS.length;
+const SKI_DAYS  = 2;
+
+/* Everything is in baht.
+   per:  'person' = each traveller pays it | 'group' = split across the group
+   unit: 'total'  = the figure is the whole cost | 'day' = figure is per day, ×mult */
+const DEFAULTS = [
+  { id:'flight', nm:'Flights',       sb:'AirAsia X, Bangkok ⇄ Nagoya, economy, return',
+    v:15600, per:'person', unit:'total', mult:1 },
+  { id:'accom',  nm:'Accommodation', sb:'6 bookings, 9 nights, already priced per person',
+    v:Math.round(ACCOM), per:'person', unit:'total', mult:1 },
+  { id:'car',    nm:'Car rental',    sb:'10-day minivan, winter tyres',
+    v:36900, per:'group', unit:'total', mult:1 },
+  { id:'fuel',   nm:'Fuel & tolls',  sb:'Full loop, expressway tolls included',
+    v:7176, per:'group', unit:'total', mult:1 },
+  { id:'ski',    nm:'Ski rental',    sb:`Gear and lift pass — Seaside Valley (D5) and Akakura (D7)`,
+    v:2460, per:'person', unit:'day', mult:SKI_DAYS, skiOnly:true },
+  { id:'food',   nm:'Food & drink',  sb:'Casual to mid-range, two ryokan meals already included',
+    v:720, per:'person', unit:'day', mult:TRIP_DAYS }
+];
+
+let state, ppl = 6, skiers = 6;
+
+function resetState(){
+  state = {};
+  DEFAULTS.forEach(l => state[l.id] = l.v);
+  ppl = 6; skiers = 6;
+}
+
+function fmt(n){ return '฿' + Math.round(n).toLocaleString('en-US'); }
+
+/* total baht this line contributes to one person who pays it */
+function perPerson(l){
+  const gross = state[l.id] * l.mult;
+  return l.per === 'group' ? gross/ppl : gross;
+}
+
+function unitLabel(l){
+  if(l.unit === 'day') return `฿ per person, per day × ${l.mult}`;
+  return l.per === 'group' ? '฿ group total' : '฿ per person';
+}
+
+function renderLines(){
+  document.getElementById('budLines').innerHTML = DEFAULTS.map(l=>`
+    <div class="bl">
+      <div>
+        <div class="nm">${l.nm}${l.skiOnly ? ' <span class="mono" style="color:#8fb4c8">· skiers only</span>' : ''}</div>
+        <div class="sb">${l.sb}<br>
+          <span class="mono">${unitLabel(l)}</span>
+          <span class="mono sub-calc" id="calc-${l.id}"></span>
+        </div>
+      </div>
+      <input type="number" id="in-${l.id}" value="${state[l.id]}" min="0" step="any"
+             inputmode="decimal" aria-label="${l.nm}, baht">
+    </div>`).join('');
+
+  DEFAULTS.forEach(l=>{
+    document.getElementById('in-'+l.id).addEventListener('input', e=>{
+      const n = parseFloat(e.target.value);
+      state[l.id] = isNaN(n) ? 0 : n;
+      compute();
+    });
+  });
+}
+
+function compute(){
+  if(skiers > ppl) skiers = ppl;
+
+  let shared = 0,   // group costs, split across everyone
+      common = 0,   // per-person costs everyone pays
+      ski    = 0;   // per-person costs only skiers pay
+
+  DEFAULTS.forEach(l=>{
+    const v = perPerson(l);
+    if(l.per === 'group')   shared += v;
+    else if(l.skiOnly)      ski    += v;
+    else                    common += v;
+
+    const el = document.getElementById('calc-'+l.id);
+    if(el){
+      el.textContent = (l.unit==='day' || l.per==='group') ? ' → ' + fmt(v) + ' pp' : '';
+    }
+  });
+
+  const skierPP  = shared + common + ski;
+  const plainPP  = shared + common;
+  const group    = skierPP*skiers + plainPP*(ppl - skiers);
+
+  document.getElementById('tPP').textContent      = fmt(skierPP);
+  document.getElementById('tPPNoSki').textContent = fmt(plainPP);
+  document.getElementById('tDelta').textContent   = ski > 0 ? fmt(ski) + ' less' : 'same — no ski cost set';
+  document.getElementById('tShared').textContent  = fmt(shared);
+  document.getElementById('tIndiv').textContent   = fmt(common);
+  document.getElementById('tSki').textContent     = fmt(ski);
+  document.getElementById('tGroup').textContent   = fmt(group);
+
+  document.getElementById('pplVal').textContent = ppl;
+  document.getElementById('skiVal').textContent = skiers;
+  document.getElementById('pplHint').textContent =
+    `Car and fuel split ${ppl} ways. `
+    + (skiers === ppl ? 'Everyone is skiing.'
+      : skiers === 0  ? 'Nobody is skiing — ski rental drops out entirely.'
+      : `${skiers} skiing, ${ppl - skiers} not.`);
+  document.getElementById('tMix').textContent =
+    skiers === ppl || skiers === 0
+      ? `${ppl} × ${fmt(skiers === ppl ? skierPP : plainPP)}`
+      : `${skiers} × ${fmt(skierPP)} + ${ppl-skiers} × ${fmt(plainPP)}`;
+}
+
+function stepper(id, get, set, min, max){
+  document.getElementById(id).addEventListener('click', ()=>{
+    const n = get();
+    const lo = (typeof min === 'function') ? min() : min;
+    const hi = (typeof max === 'function') ? max() : max;
+    if(n >= lo && n <= hi){ set(n); compute(); }
+  });
+}
+stepper('pplUp',   ()=>ppl+1,    v=>ppl=v,    1, 12);
+stepper('pplDown', ()=>ppl-1,    v=>ppl=v,    1, 12);
+stepper('skiUp',   ()=>skiers+1, v=>skiers=v, 0, ()=>ppl);
+stepper('skiDown', ()=>skiers-1, v=>skiers=v, 0, ()=>ppl);
+
+document.getElementById('reset').addEventListener('click', ()=>{
+  resetState(); renderLines(); compute();
+});
+
+resetState(); renderLines(); compute();
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'),
+      lbCap=document.getElementById('lbCap');
+let lastFocus=null;
+document.addEventListener('click', e=>{
+  const t = e.target.closest('.thumb');
+  if(!t) return;
+  lastFocus = document.activeElement;
+  lbImg.src = t.dataset.img.replace(/width=\d+/, 'width=1600');
+  lbImg.alt = t.dataset.cap;
+  lbCap.textContent = t.dataset.cap;
+  lb.classList.add('open');
+  document.getElementById('lbX').focus();
+});
+function closeLb(){
+  lb.classList.remove('open'); lbImg.src='';
+  if(lastFocus) lastFocus.focus();
+}
+document.getElementById('lbX').addEventListener('click', closeLb);
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
+window.addEventListener('keydown', e=>{ if(e.key==='Escape' && lb.classList.contains('open')) closeLb(); });
+
+/* ============================================================
+   SNOWFALL — three depth layers, viewport-sized
+   ============================================================ */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c=document.getElementById('snow'), ctx=c.getContext('2d');
+  let w,h,flakes;
+  function size(){
+    w = c.width  = window.innerWidth;
+    h = c.height = window.innerHeight;
+  }
+  function seed(){
+    const n = Math.min(140, Math.round(window.innerWidth/9));
+    flakes = Array.from({length:n}, ()=>{
+      const depth = Math.random();           // 0 far, 1 near
+      return {
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: 0.5 + depth*2.1,
+        vy: 0.14 + depth*0.62,
+        vx: (Math.random()-0.5)*0.35,
+        a: 0.22 + depth*0.5,
+        ph: Math.random()*Math.PI*2
+      };
+    });
+  }
+  size(); seed();
+  let rt; window.addEventListener('resize', ()=>{
+    clearTimeout(rt); rt=setTimeout(()=>{size(); seed();}, 180);
+  });
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(const f of flakes){
+      ctx.globalAlpha = f.a;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI*2); ctx.fill();
+      f.ph += 0.012;
+      f.y += f.vy;
+      f.x += f.vx + Math.sin(f.ph)*0.28;
+      if(f.y > h+6){ f.y = -6; f.x = Math.random()*w; }
+      if(f.x < -8) f.x = w+8; else if(f.x > w+8) f.x = -8;
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
