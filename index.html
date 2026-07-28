@@ -164,6 +164,13 @@
     font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--slate);
     border-left:2px solid var(--glacier);padding-left:.6rem;margin-bottom:1.1rem;
   }
+  .day-temp{
+    font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--sumi);
+    margin-bottom:.7rem;display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;
+  }
+  .day-temp .k{
+    font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);font-weight:400;
+  }
 
   /* stay */
   .stay{border:1px solid var(--line);background:var(--paper);padding:.85rem .9rem;}
@@ -226,6 +233,16 @@
   @media(max-width:520px){.stop-b{flex-direction:column-reverse;}
     .thumb{width:100%;flex:none;height:170px;}}
 
+  .car-btn{position:absolute;top:50%;transform:translateY(-50%);width:22px;height:22px;
+    background:rgba(15,18,22,.5);border:none;color:#fff;font-size:.9rem;line-height:1;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;}
+  .car-btn:hover{background:rgba(15,18,22,.75);}
+  .car-prev{left:.3rem;}
+  .car-next{right:.3rem;}
+  .car-count{position:absolute;bottom:.3rem;right:.4rem;font-family:'JetBrains Mono',monospace;
+    font-size:.58rem;letter-spacing:.03em;color:#fff;background:rgba(15,18,22,.55);
+    padding:.05rem .35rem;border-radius:2px;z-index:2;}
+
   /* optional */
   .side .opt{border-top:1px solid var(--line);padding-top:.9rem;}
   .side .opt .k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;
@@ -248,6 +265,30 @@
   .budget .eyebrow{color:#8fb4c8;}
   .budget h2{color:#fff;}
   .budget .band-head p{color:#98a2ab;}
+
+  /* ================= PACKING ================= */
+  .pack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.6rem;}
+  .pack-card{border:1px solid var(--line);background:var(--drift);padding:1.2rem 1.3rem;}
+  .pack-card .pk-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--glacier);}
+  .pack-card h4{font-family:'Zen Antique',serif;font-weight:400;font-size:1.15rem;margin:.35rem 0 .8rem;}
+  .pack-card ul{margin:0;padding:0;list-style:none;font-size:.86rem;color:var(--slate);}
+  .pack-card ul li{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;
+    border-bottom:1px dashed var(--line);}
+  .pack-card ul li:last-child{border-bottom:0;padding-bottom:0;}
+  .pk-ic{width:18px;height:18px;flex:0 0 18px;stroke:var(--glacier);fill:none;
+    stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .pk-name{flex:1;line-height:1.35;}
+  .pk-qty{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.04em;
+    color:var(--slate);background:var(--paper);border:1px solid var(--line);
+    border-radius:3px;padding:.18rem .45rem;white-space:nowrap;flex:0 0 auto;}
+  .pk-qty.opt{color:var(--shu);border-color:#e3b8b0;background:#fbf0ee;}
+  .pack-note{border-left:2px solid var(--shu);padding-left:.9rem;margin-top:2.2rem;
+    font-size:.88rem;color:var(--slate);max-width:70ch;line-height:1.7;}
+  .pack-note b{color:var(--sumi);}
+  .pack-legend{display:flex;gap:1.4rem;flex-wrap:wrap;margin:1.6rem 0 2rem;
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--slate);}
+  .pack-legend span.pk-qty{margin-right:.4rem;}
 
   .bud-grid{display:grid;grid-template-columns:1fr 340px;gap:2.6rem;align-items:start;}
   @media(max-width:900px){.bud-grid{grid-template-columns:1fr;}}
@@ -315,6 +356,16 @@
     background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;
     font-size:1.1rem;cursor:pointer;}
   .lb-x:hover{background:rgba(255,255,255,.12);}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;
+    background:rgba(15,18,22,.55);border:1px solid rgba(255,255,255,.3);color:#fff;
+    font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .lb-nav:hover{background:rgba(255,255,255,.16);}
+  .lb-prev{left:1rem;}
+  .lb-next{right:1rem;}
+  @media(max-width:640px){.lb-nav{width:40px;height:40px;font-size:1.25rem;}
+    .lb-prev{left:.4rem;} .lb-next{right:.4rem;}}
+  .lb-count{position:absolute;bottom:1.3rem;left:50%;transform:translateX(-50%);
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:#c8d0d7;}
 
   footer{background:var(--sumi);color:#7d878f;text-align:center;
     padding:2.5rem 1.6rem 3rem;font-size:.75rem;position:relative;z-index:2;
@@ -384,6 +435,100 @@
 <!-- ============ DAYS ============ -->
 <div id="days"></div>
 
+<!-- ============ PACKING ============ -->
+<section class="band" id="packing">
+  <div class="wrap">
+    <div class="band-head">
+      <div class="eyebrow">What To Pack</div>
+      <h2>Layers, not a suitcase full of separate outfits</h2>
+      <p>Average highs and lows across the trip run from about −4° to 13°C, indoors are heated
+        and often warm, and you'll be in and out of ryokan, cars, and snow all day. Clothing only —
+        ski jackets, boards, and lift-ready gear are covered by the rental shops on the ski days.</p>
+    </div>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="ic-top" viewBox="0 0 24 24"><path d="M8 3 4 6v4h3v11h10V10h3V6l-4-3-2 2h-4z"/></symbol>
+        <symbol id="ic-bottom" viewBox="0 0 24 24"><path d="M7 3h10l1 8-1 10h-3l-1-9-1 9H9l-1-10z"/></symbol>
+        <symbol id="ic-sock" viewBox="0 0 24 24"><path d="M9 2h6v9l4 4v3a4 4 0 0 1-4 4H9a2 2 0 0 1-2-2v-8z"/></symbol>
+        <symbol id="ic-vest" viewBox="0 0 24 24"><path d="M9 3 6 6v14h4V9l2 3 2-3v11h4V6l-3-3-3 2z"/></symbol>
+        <symbol id="ic-coat" viewBox="0 0 24 24"><path d="M9 2 4 5v6h3v11h10V11h3V5l-5-3-2 2-2-2z"/><path d="M12 8v11" stroke-dasharray="2 2"/></symbol>
+        <symbol id="ic-umbrella" viewBox="0 0 24 24"><path d="M12 3v16"/><path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 19a2 2 0 0 1-2 2"/></symbol>
+        <symbol id="ic-boot" viewBox="0 0 24 24"><path d="M8 2v10l-5 4v3a1 1 0 0 0 1 1h16a2 2 0 0 0 0-4l-8-3V2z"/></symbol>
+        <symbol id="ic-shoe" viewBox="0 0 24 24"><path d="M3 16c3-1 4-4 7-4 3 0 3 2 6 2s5-2 5 2a3 3 0 0 1-3 3H4a2 2 0 0 1-1-2z"/></symbol>
+        <symbol id="ic-warmer" viewBox="0 0 24 24"><path d="M12 2c3 3 5 6 5 9a5 5 0 0 1-10 0c0-1.3.6-2.4 1.4-3.4C9 9 10 9.6 10 11c1-2 .5-4-.5-5.5C11 6 12 4 12 2z"/></symbol>
+        <symbol id="ic-gloves" viewBox="0 0 24 24"><path d="M6 12V6a2 2 0 0 1 4 0v3M10 9V4a2 2 0 0 1 4 0v5M14 9V5a2 2 0 0 1 4 0v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-2a2 2 0 0 1 4 0"/></symbol>
+        <symbol id="ic-hat" viewBox="0 0 24 24"><path d="M4 15a8 8 0 0 1 16 0z"/><path d="M3 15h18"/></symbol>
+        <symbol id="ic-scarf" viewBox="0 0 24 24"><path d="M3 6c3 2 6-2 9 0s6-2 9 0"/><path d="M8 6v13a2 2 0 0 0 4 0v-4"/></symbol>
+        <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></symbol>
+        <symbol id="ic-drop" viewBox="0 0 24 24"><path d="M12 2s6 7 6 12a6 6 0 0 1-12 0c0-5 6-12 6-12z"/></symbol>
+        <symbol id="ic-towel" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 9h16M9 9v11"/></symbol>
+        <symbol id="ic-bag" viewBox="0 0 24 24"><path d="M6 8h12l1 13H5z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+      </defs>
+    </svg>
+
+    <div class="pack-grid">
+      <div class="pack-card">
+        <div class="pk-eyebrow">Layer 1</div>
+        <h4>Base layers</h4>
+        <ul>
+          <li><svg class="pk-ic"><use href="#ic-top"/></svg><span class="pk-name">Thermal tops (merino or synthetic, not cotton)</span><span class="pk-qty">×3</span></li>
+          <li><svg class="pk-ic"><use href="#ic-bottom"/></svg><span class="pk-name">Thermal leggings / long johns</span><span class="pk-qty">×2–3</span></li>
+          <li><svg class="pk-ic"><use href="#ic-sock"/></svg><span class="pk-name">Thick wool-blend socks</span><span class="pk-qty">×1 per day</span></li>
+        </ul>
+      </div>
+      <div class="pack-card">
+        <div class="pk-eyebrow">Layer 2</div>
+        <h4>Insulating mid-layer</h4>
+        <ul>
+          <li><svg class="pk-ic"><use href="#ic-top"/></svg><span class="pk-name">Fleece or wool jumper</span><span class="pk-qty">×2</span></li>
+          <li><svg class="pk-ic"><use href="#ic-vest"/></svg><span class="pk-name">Light down / synthetic-fill vest</span><span class="pk-qty">×1</span></li>
+          <li><svg class="pk-ic"><use href="#ic-top"/></svg><span class="pk-name">One smarter layer, for dinners out</span><span class="pk-qty opt">optional</span></li>
+        </ul>
+      </div>
+      <div class="pack-card">
+        <div class="pk-eyebrow">Layer 3</div>
+        <h4>Outer shell</h4>
+        <ul>
+          <li><svg class="pk-ic"><use href="#ic-coat"/></svg><span class="pk-name">Waterproof, windproof winter coat</span><span class="pk-qty">×1</span></li>
+          <li><svg class="pk-ic"><use href="#ic-bottom"/></svg><span class="pk-name">Waterproof trousers / snow-resistant jeans</span><span class="pk-qty">×1</span></li>
+          <li><svg class="pk-ic"><use href="#ic-umbrella"/></svg><span class="pk-name">Packable umbrella — coastal days bring rain too</span><span class="pk-qty">×1</span></li>
+        </ul>
+      </div>
+      <div class="pack-card">
+        <div class="pk-eyebrow">Feet</div>
+        <h4>Footwear</h4>
+        <ul>
+          <li><svg class="pk-ic"><use href="#ic-boot"/></svg><span class="pk-name">Waterproof snow boots, real tread — Jigokudani and Ainokura get icy</span><span class="pk-qty">×1</span></li>
+          <li><svg class="pk-ic"><use href="#ic-shoe"/></svg><span class="pk-name">Slip-on shoes, for ryokan and house stays</span><span class="pk-qty">×1</span></li>
+          <li><svg class="pk-ic"><use href="#ic-warmer"/></svg><span class="pk-name">Toe warmers, for the coldest walking days</span><span class="pk-qty opt">as needed</span></li>
+        </ul>
+      </div>
+      <div class="pack-card">
+        <div class="pk-eyebrow">Extras</div>
+        <h4>Hands, head, face</h4>
+        <ul>
+          <li><svg class="pk-ic"><use href="#ic-gloves"/></svg><span class="pk-name">Warm waterproof gloves</span><span class="pk-qty">×1 pair</span></li>
+          <li><svg class="pk-ic"><use href="#ic-hat"/></svg><span class="pk-name">Beanie</span><span class="pk-qty">×1</span></li>
+          <li><svg class="pk-ic"><use href="#ic-scarf"/></svg><span class="pk-name">Neck gaiter or scarf</span><span class="pk-qty">×1</span></li>
+          <li><svg class="pk-ic"><use href="#ic-sun"/></svg><span class="pk-name">Sunglasses — snow glare is stronger than it looks</span><span class="pk-qty">×1</span></li>
+          <li><svg class="pk-ic"><use href="#ic-drop"/></svg><span class="pk-name">Lip balm and a rich moisturiser</span><span class="pk-qty">as needed</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pack-legend">
+      <span><span class="pk-qty">×2</span> pack this many</span>
+      <span><span class="pk-qty opt">optional</span> nice to have, not essential</span>
+    </div>
+
+    <p class="pack-note"><b>Layer, don't bulk up.</b> Days swing roughly 10°C between morning
+      and afternoon, and you'll move between a heated car, a heated ryokan, and the outdoors
+      repeatedly — several thin layers you can add or shed beat one heavy coat. Hand and foot
+      warmers (kairo, カイロ) are sold everywhere in convenience stores if you run short.</p>
+  </div>
+</section>
+
 <!-- ============ BUDGET ============ -->
 <section class="band budget" id="budget">
   <div class="wrap">
@@ -445,7 +590,10 @@
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo">
   <button class="lb-x" id="lbX" aria-label="Close photo">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">›</button>
   <figure><img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <div class="lb-count" id="lbCount"></div>
 </div>
 
 <script>
@@ -554,82 +702,91 @@ const STAYS = {
    ============================================================ */
 const DAYS = [
 {
-  num:"01", date:"26 Feb · Fri", title:"Arrive Nagoya, drive to Takayama",
+  num:"01", date:"26 Feb · Fri", title:"Arrive Nagoya, drive to Takayama", temp:{hi:8, lo:-2},
   stay:"Hidasumika Machiya Sakurayama", route:["ngo","sanm"], ciBefore:"Takayama Old Town",
   stops:[
     { t:"10:30", n:"Land at Centrair (XJ638)", p:"Clear customs, pick up the rental car, head north.", m:"ngo" },
     { t:"12:00", n:"North into the Hida mountains", p:"Roughly two and a half hours up from the coast plain." },
     { t:"13:00", n:"Lunch", meal:true, p:"Hida beef curry, or a bento from a Gifu expressway service area." },
     { t:"15:30", n:"Takayama Old Town", p:"Edo-period lanes, sake breweries, an evening walk before the cold sets in.", m:"sanm",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Hida_Takayama_old_town_streets_(48519370292).jpg?width=700",
-      cap:"Takayama Old Town" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Takayama%27s_Early_Winter_Welcome_%28NE%29.jpg?width=700",cap:"Takayama Old Town in early winter"},
+        {src:"https://cdn.visitgifu.com/wp/2020/03/7008d718-pagemain_pc_m_traveltogifu.jpg",cap:"Takayama Old Town"},
+        {src:"https://cdn.visitgifu.com/wp/2020/03/869e29b5-20180907takayama_sannomachi2-1290x793.jpg",cap:"Sanmachi Suji street"},
+        {src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZo64Zz9bmr2J7l2VuabvauNOt-v17EJKib8DReOlGlZAUAE3GSpi2HgA&s=10",cap:"Takayama Old Town"}] },
     { t:"19:00", n:"Dinner", meal:true, p:"Hida beef yakiniku, or a sansai mountain-vegetable set." }
   ],
   opt:[{ n:"Sanmachi sake brewery tasting", p:"Several old breweries in the old town pour tastings into the early evening." }]
 },
 {
-  num:"02", date:"27 Feb · Sat", title:"Takayama, on foot",
+  num:"02", date:"27 Feb · Sat", title:"Takayama, on foot", temp:{hi:6, lo:-4},
   stay:"Hidasumika Machiya Sakurayama", route:[],
   stops:[
-    { t:"09:00", n:"Miyagawa Morning Market", p:"Riverside stalls — pickles, local produce, crafts. Winds down around noon, so it has to be the morning.", q:"Miyagawa Morning Market Takayama" },
+    { t:"09:00", n:"Miyagawa Morning Market", p:"Riverside stalls — pickles, local produce, crafts. Winds down around noon, so it has to be the morning.", q:"Miyagawa Morning Market Takayama",
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Miyagawa_Morning_Market_20150123.JPG?width=700",cap:"Miyagawa Morning Market, winter"},
+        {src:"https://www.japankakkoii.com/wp-content/uploads/2017/06/review-Takayama-Morning-Market.jpg",cap:"Miyagawa Morning Market"}] },
     { t:"12:00", n:"Lunch", meal:true, p:"Takayama ramen — a light soy broth, nothing like the Hida beef places nearby." },
-    { t:"13:30", n:"Takayama Jinya", p:"The last surviving Edo-period provincial government house in Japan. Closes at 16:30, so it goes first.", m:"jinya" },
-    { t:"15:00", n:"Hida no Sato Folk Village", p:"Thatched farmhouses relocated into an open-air village museum, ten minutes west of town. Open until 17:00 — that leaves a comfortable two hours.", m:"hida" },
+    { t:"13:30", n:"Takayama Jinya", p:"The last surviving Edo-period provincial government house in Japan. Closes at 16:30, so it goes first.", m:"jinya",
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Entrance_of_Takayama_Jinya_House_in_a_snowy_day.JPG?width=700",cap:"Takayama Jinya, snowy entrance"}] },
+    { t:"15:00", n:"Hida no Sato Folk Village", p:"Thatched farmhouses relocated into an open-air village museum, ten minutes west of town. Open until 17:00 — that leaves a comfortable two hours.", m:"hida",
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/1_Chome_Kamiokamotomachi,_Takayama-shi,_Gifu-ken_506-0055,_Japan_-_panoramio.jpg?width=700",cap:"Hida no Sato in winter"}] },
     { t:"19:00", n:"Dinner", meal:true, p:"Izakaya-style Hida beef skewers with a local junmai." }
   ],
   opt:[
     { n:"Sakurayama Hachimangū and the Yatai Kaikan", p:"Fills the gap between the market and lunch. The float hall keeps four of the festival floats on display through the winter.", q:"Takayama Yatai Kaikan Festival Floats Hall" },
-    { n:"Shinhotaka Ropeway", p:"Double-decker cable car into the Northern Alps, about an hour east. A half-day trip in itself, and it closes in high wind.", m:"ropw" }
+    { n:"Shinhotaka Ropeway", p:"Double-decker cable car into the Northern Alps, about an hour east. A half-day trip in itself, and it closes in high wind.", m:"ropw",
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Nishihotaka_from_Shinhotaka_Ropeway.jpg?width=500",cap:"Northern Alps from Shinhotaka Ropeway"}] }
   ]
 },
 {
-  num:"03", date:"28 Feb · Sun", title:"Shirakawa-gō, Ainokura, Toyama",
+  num:"03", date:"28 Feb · Sun", title:"Shirakawa-gō, Ainokura, Toyama", temp:{hi:7, lo:-3},
   stay:"Super Hotel Toyama Premier", route:["sanm","ogi","aino","kansui"],
   stops:[
     { t:"09:00", n:"Ogimachi, Shirakawa-gō", p:"The largest surviving cluster of gasshō-zukuri thatched farmhouses in Japan.", m:"ogi",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Shirakawa_Gassho-zukuri_49.jpg?width=700",
-      cap:"Shirakawa-gō" },
+      imgs:[{src:"https://res.cloudinary.com/jnto/image/upload/w_2064,h_1300,f_auto,fl_lossy,q_auto,c_fill,q_auto/v1/media/filer_public/71/e3/71e3f255-e44c-46a5-a330-1c19359ae1f9/shirakawa-go-kv_wh9o1w",cap:"Shirakawa-gō"},
+        {src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqH0iLJN2Ae4-382vsCoyB5M5-ZcBPPirByPzAsLBdusoYUIPmNDoVnUTs&s=10",cap:"Shirakawa-gō"},
+        {src:"https://visitkanazawa.jp/lsc/upfile/articleDetail/0000/1616/1616_1_xl.jpg",cap:"Shirakawa-gō"},
+        {src:"https://hida.travel/img/blogs/photos/sc-size5/bNsuNReUQDiHZE8uaphu7q36OgH9YcUb5foF0s2U-1224x.png",cap:"Shirakawa-gō"},
+        {src:"https://theportablewife.com/wp-content/uploads/shirakawago-day-trip-itinerary-featured.jpg",cap:"Shirakawa-gō"}] },
     { t:"12:00", n:"Lunch", meal:true, p:"Gohei-mochi grilled rice skewers, or soba near Ogimachi." },
     { t:"13:30", n:"Ainokura, Gokayama", p:"Same architecture, a fraction of the crowds.", m:"aino",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Ainokura_in_Gokayama_area.jpg?width=700",
-      cap:"Ainokura" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/View_of_Ainokura,_Gokayama,_Nanto,_Toyama_in_a_snowy_day_1.JPG?width=700",cap:"Ainokura on a snowy day"}] },
     { t:"16:00", n:"Kansui Park, Toyama", p:"Evening walk along the Fugan Canal.", m:"kansui",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Starbucks_Toyama_Kansui_park.jpg?width=700",
-      cap:"Kansui Park, Toyama" },
+      imgs:[{src:"https://www.toyamashi-kankoukyoukai.jp/wp-content/uploads/2026/03/img_69afaf6dcc73e6.79149567-1024x683.jpg",cap:"Kansui Park, Toyama"},
+        {src:"https://i0.wp.com/chloestravelogue.com/wp-content/uploads/2018/11/Toyama-Starbucks-2-1.jpg?resize=900%2C675&ssl=1",cap:"Starbucks Kansui Park, Toyama"}] },
     { t:"19:00", n:"Dinner", meal:true, p:"Shiroebi white-shrimp sushi, or a bowl of Toyama black ramen." }
   ],
   opt:[{ n:"Gokayama washi papermaking", p:"Hands-on traditional papermaking workshop a few minutes from Ainokura." }]
 },
 {
-  num:"04", date:"1 Mar · Mon", title:"The coast day: Amaharashi to Asahi",
+  num:"04", date:"1 Mar · Mon", title:"The coast day: Amaharashi to Asahi", temp:{hi:9, lo:0},
   stay:"Ocean View House, Asahi", route:["kansui","amah","himi","glass","asahi"],
   heavy:true,
   stops:[
     { t:"09:00", n:"Amaharashi Coast", p:"Pine-lined shore with the Tateyama range standing across the bay — on a clear day.", m:"amah",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Amaharashi_Coast_20190429.jpg?width=700",
-      cap:"Amaharashi Coast" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Tateyama_Mountains_and_Onna-iwa_viewed_from_Amaharashi_Coast_20190309134344.jpg?width=700",cap:"Snow-capped Tateyama range from Amaharashi Coast, March"}] },
     { t:"12:00", n:"Himi Banya-gai", p:"Fish market and food hall on Toyama Bay. Free foot-bath outside.", m:"himi",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Himi_port.jpg?width=700",
-      cap:"Himi fishing port" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Himi_port.jpg?width=700",cap:"Himi fishing port"}] },
     { t:"12:30", n:"Lunch", meal:true, p:"Kaisen-don at the market, or hotaruika firefly squid if the season has started." },
     { t:"14:30", n:"Toyama Glass Art Museum", p:"Contemporary glass inside a Kengo Kuma building shared with the city library.", m:"glass",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Toyama_Glass_Art_Museum_Entrance_2017.JPG?width=700",
-      cap:"Toyama Glass Art Museum" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Toyama_Glass_Art_Museum_Entrance_2017.JPG?width=700",cap:"Toyama Glass Art Museum"},
+        {src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8uz4MY7f-6Jbw9y--LfragbYVlPZ-9-KNlIY6sbDm-BDc1vU2Y_c0XsJI&s=10",cap:"Toyama Glass Art Museum"},
+        {src:"https://images.adsttc.com/media/images/5b7e/161a/f197/cc22/fe00/01f9/newsletter/_WEI3892.jpg?1534989795",cap:"Toyama Glass Art Museum interior"},
+        {src:"https://svcstrg.cld.navitime.jp/travelguide/p16010008/p16010008_01.jpg",cap:"Toyama Glass Art Museum"}] },
     { t:"17:00", n:"East to Asahi", p:"Settle in for two nights on the coast. Sunset is around 17:45 — the tail of this drive is in the dark.", m:"asahi" },
     { t:"19:00", n:"Dinner", meal:true, p:"Grilled fish or a nabe hot pot in Asahi." }
   ],
   opt:[
     { n:"Toyama Castle", p:"Reconstructed keep in the old castle park, five minutes from the glass museum. Easy to add if you're running ahead.", m:"tcas",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Toyama_Castle.jpg?width=500",
-      cap:"Toyama Castle" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Toyama_Castle.jpg?width=500",cap:"Toyama Castle"}] },
     { n:"Southern Noto Peninsula loop", p:"Adds roughly two hours of coastal driving. Only works if you skip Toyama city entirely." }
   ]
 },
 {
-  num:"05", date:"2 Mar · Tue", title:"Ski day: Itoigawa Seaside Valley",
+  num:"05", date:"2 Mar · Tue", title:"Ski day: Itoigawa Seaside Valley", temp:{hi:7, lo:-1},
   stay:"Ocean View House, Asahi", route:["asahi","ssv","asahi"],
   stops:[
-    { t:"09:00", n:"Itoigawa Seaside Valley", p:"A small local hill with a single long lift, reliable powder, and the Sea of Japan below you on a clear run.", m:"ssv" },
+    { t:"09:00", n:"Itoigawa Seaside Valley", p:"A small local hill with a single long lift, reliable powder, and the Sea of Japan below you on a clear run.", m:"ssv",
+      imgs:[{src:"https://www.yukiguni-journey.jp/wp-content/uploads/2021/12/01.jpg",cap:"Itoigawa Seaside Valley"}] },
     { t:"12:30", n:"Lunch", meal:true, p:"Lodge curry rice or ramen at the resort restaurant." },
     { t:"16:30", n:"Back to Asahi", p:"Second night on the coast." },
     { t:"19:00", n:"Dinner", meal:true, p:"Home-style cooking, or more coastal seafood." }
@@ -637,62 +794,66 @@ const DAYS = [
   opt:[{ n:"Fossa Magna Museum, Itoigawa", p:"Geology museum built around the region's jade. A good non-ski afternoon." }]
 },
 {
-  num:"06", date:"3 Mar · Wed", title:"Along the coast, then up to Myōkō",
+  num:"06", date:"3 Mar · Wed", title:"Along the coast, then up to Myōkō", temp:{hi:6, lo:-3},
   stay:"170㎡ Myōkō House", route:["asahi","umi","akak"],
   stops:[
     { t:"09:00", n:"Leave Asahi", p:"Coastal road east toward Jōetsu." },
     { t:"10:00", n:"Jōetsu Aquarium Umigatari", p:"Sea-of-Japan aquarium with a dolphin pool that looks straight out at the actual sea.", m:"umi",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Joetsu_Aquarium_Umigatari.jpg?width=700",
-      cap:"Jōetsu Aquarium Umigatari" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Joetsu_Aquarium_Umigatari.jpg?width=700",cap:"Jōetsu Aquarium Umigatari"},
+        {src:"https://enjoyniigata.com/image/rendering/attraction_image/227091/keep/1200?v=fe0f5c115180d8eb3c388b3c9865df9686ac78d4",cap:"Jōetsu Aquarium Umigatari"},
+        {src:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/cc/92/8f/caption.jpg?w=1200&h=1200&s=1",cap:"Jōetsu Aquarium Umigatari"},
+        {src:"https://www.umigatari.jp/image/202412en_07.jpg",cap:"Jōetsu Aquarium Umigatari"},
+        {src:"https://www.umigatari.jp/image/202412en_03.jpg",cap:"Jōetsu Aquarium Umigatari"}] },
     { t:"12:30", n:"Lunch", meal:true, p:"Jōetsu seafood, or local soba on the way out of town." },
     { t:"13:30", n:"Climb to Myōkō", p:"Off the coast and into the mountains for two nights.", m:"akak",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Mt_Myoko_-_panoramio.jpg?width=700",
-      cap:"Mount Myōkō" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Mt_Myoko_-_panoramio.jpg?width=700",cap:"Mount Myōkō"},
+        {src:"https://www.powderhounds.com/site/DefaultSite/filesystem/images/Japan/MyokoKogen/Overview/01.jpg",cap:"Myōkō Kogen"},
+        {src:"https://travel.rakuten.com/contents/sites/contents/files/styles/max_1300x1300/public/2023-11/ski-resort-myoko-kogen_7.jpg?itok=pXUpvsmv",cap:"Myōkō Kogen ski resort"}] },
     { t:"19:00", n:"Dinner", meal:true, p:"Cook at the house — Niigata rice and vegetables from the local michi-no-eki." }
   ],
   opt:[]
 },
 {
-  num:"07", date:"4 Mar · Thu", title:"Ski day in Myōkō",
+  num:"07", date:"4 Mar · Thu", title:"Ski day in Myōkō", temp:{hi:5, lo:-4},
   stay:"170㎡ Myōkō House", route:[],
   stops:[
     { t:"08:30", n:"Akakura Onsen Ski Area", p:"First lifts. Mostly beginner and intermediate terrain, and the joint pass with neighbouring Akakura Kanko opens up the steeper runs for about ¥1,000 more.", m:"akski",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Akakura_onsen_ski_resort_(49819015158).jpg?width=700",
-      cap:"Akakura Onsen ski area" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Akakura_onsen_ski_resort_(49819015158).jpg?width=700",cap:"Akakura Onsen ski area"}] },
     { t:"12:30", n:"Lunch", meal:true, p:"On the mountain — lodge curry, or Nagano soba and oyaki at the base village." },
     { t:"15:30", n:"Onsen at the bottom of the run", p:"Akakura is a hot spring village first and a ski hill second. The baths are a two-minute walk from the last lift.", m:"akak" },
     { t:"19:00", n:"Dinner", meal:true, p:"Home cooking at the house, or a local izakaya if anyone wants a night out." }
   ],
   opt:[
-    { n:"Myōkō Suginohara instead", p:"Fifteen minutes south. One gondola, almost no lift queues, and an 8.5 km top-to-bottom run — the longest in Japan.", m:"sugi" },
+    { n:"Myōkō Suginohara instead", p:"Fifteen minutes south. One gondola, almost no lift queues, and an 8.5 km top-to-bottom run — the longest in Japan.", m:"sugi",
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Myoko_Suginohara_Ski_Resort_-_Jan_13,_2014_%281%29.jpg?width=500",cap:"Myōkō Suginohara, January"}] },
     { n:"Skip the skiing", p:"A slower day of onsen-hopping and cafés around Myōkō village." }
   ]
 },
 {
-  num:"08", date:"5 Mar · Fri", title:"Myōkō to Shibu Onsen, via the monkeys",
+  num:"08", date:"5 Mar · Fri", title:"Myōkō to Shibu Onsen, via the monkeys", temp:{hi:8, lo:-2},
   stay:"Hotel Housei, Shibu Onsen", route:["akak","jigo","shibu"], roadKm:75,
   stops:[
     { t:"08:00", n:"Leave the Myōkō house", p:"Check out and head east. The direct mountain road is shut in winter, so it's a loop round on the Jōshin-etsu expressway via Shinshū-Nakano — closer to an hour and a half than the map suggests.", m:"akak" },
     { t:"09:30", n:"Jigokudani Monkey Park", p:"Wild macaques in their own hot spring. It's a 1.6 km walk in from the car park — packed snow and ice the whole way, so bring grips.", m:"jigo",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Snow_Monkeys,_Nagano,_Japan.JPG?width=700",
-      cap:"Jigokudani Monkey Park" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Snow_Monkeys,_Nagano,_Japan.JPG?width=700",cap:"Jigokudani Monkey Park"}] },
     { t:"12:30", n:"Lunch", meal:true, p:"Nagano soba around Yudanaka, five minutes back down the hill from the park." },
     { t:"14:30", n:"Shibu Onsen", p:"Ten minutes on from the park. Lantern-lit hot spring town of nine public bathhouses — check in, change into a yukata.", m:"shibu",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/Shibu_Onsen.jpg?width=700",
-      cap:"Shibu Onsen" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Shibu_Onsen.jpg?width=700",cap:"Shibu Onsen"},
+        {src:"https://images.trvl-media.com/place/3000757325/1665ccdd-5f63-4567-8e7a-8aa15a93e787.jpg",cap:"Shibu Onsen"},
+        {src:"https://japanspecialist.com/o/adaptive-media/image/3833571/large/1_Shibu+Onsen.jpg?t=1756118455125",cap:"Shibu Onsen"},
+        {src:"https://eijfa9g4ivj.exactdn.com/wp-content/uploads/2024/07/shibu-onsen-65-1024x779.jpg?strip=all",cap:"Shibu Onsen"}] },
     { t:"19:00", n:"Dinner", meal:true, p:"Included at Hotel Housei — a kaiseki-style ryokan dinner." }
   ],
   opt:[{ n:"The nine-bathhouse stamp rally", p:"Shibu's tradition: tour all nine public baths in yukata in one evening. Guests of the ryokan get the key to all nine." }]
 },
 {
-  num:"09", date:"6 Mar · Sat", title:"Matsumoto, then the long run south",
+  num:"09", date:"6 Mar · Sat", title:"Matsumoto, then the long run south", temp:{hi:11, lo:1},
   stay:"J Hotel Rinku", route:["shibu","mcas","rinku"], roadKm:390,
   heavy:true,
   stops:[
     { t:"09:00", n:"Leave Shibu", p:"Highway south toward Matsumoto." },
     { t:"10:00", n:"Matsumoto Castle", p:"One of Japan's twelve original keeps — black-walled, moated, and genuinely old inside.", m:"mcas",
-      img:"https://commons.wikimedia.org/wiki/Special:FilePath/MatsumotoCastle.jpg?width=700",
-      cap:"Matsumoto Castle" },
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/MatsumotoCastle.jpg?width=700",cap:"Matsumoto Castle"}] },
     { t:"12:30", n:"Lunch", meal:true, p:"Shinshū soba near the castle." },
     { t:"14:00", n:"South to Rinku", p:"The longest single drive of the trip. J Hotel Rinku is one train stop from the terminal, with an Aeon Mall next door.", m:"rinku" },
     { t:"19:00", n:"Dinner", meal:true, p:"Something easy at the mall next door — a last casual meal before flying." }
@@ -700,7 +861,7 @@ const DAYS = [
   opt:[{ n:"Nakamachi merchant street", p:"Matsumoto's white-walled kura warehouse district. Good coffee, slow wander." }]
 },
 {
-  num:"10", date:"7 Mar · Sun", title:"Return the car, fly home",
+  num:"10", date:"7 Mar · Sun", title:"Return the car, fly home", temp:{hi:13, lo:3},
   stay:null, route:[],
   stops:[
     { t:"08:00", n:"Drop the rental car", p:"Ten minutes from Rinku to the return desk at Centrair.", m:"ngo" },
@@ -719,6 +880,24 @@ function mapLink(s){
   if(s.m) return `<a class="tiny" href="${gmap(s.m)}" target="_blank" rel="noopener">Map ↗</a>`;
   if(s.q) return `<a class="tiny" href="${gsearch(s.q)}" target="_blank" rel="noopener">Map ↗</a>`;
   return '';
+}
+
+/* Every stop/opt with images gets its photo set registered here once, and the
+   DOM node just carries the index — the lightbox and inline carousel both read
+   from this same array so "next" always means the same thing in both places. */
+const GALLERIES = [];
+function renderThumb(imgs, fallbackCap, extraClass){
+  if(!imgs || !imgs.length) return '';
+  const gIdx = GALLERIES.push(imgs) - 1;
+  const first = imgs[0];
+  return `<div class="thumb${extraClass ? ' ' + extraClass : ''}" data-gallery="${gIdx}" data-idx="0">
+    <img class="car-img" src="${first.src}" alt="${first.cap || fallbackCap}" loading="lazy"
+         onerror="this.closest('.thumb').remove()">
+    ${imgs.length > 1 ? `
+      <button type="button" class="car-btn car-prev" aria-label="Previous photo">‹</button>
+      <button type="button" class="car-btn car-next" aria-label="Next photo">›</button>
+      <div class="car-count">1 / ${imgs.length}</div>` : ''}
+  </div>`;
 }
 
 DAYS.forEach((d, i) => {
@@ -787,9 +966,7 @@ DAYS.forEach((d, i) => {
           <p>${s.p}</p>
           ${mapLink(s) ? `<div class="lnks">${mapLink(s)}</div>` : ''}
         </div>
-        ${s.img ? `<div class="thumb" data-img="${s.img}" data-cap="${s.cap || s.n}">
-          <img src="${s.img}" alt="${s.cap || s.n}" loading="lazy"
-               onerror="this.closest('.thumb').remove()"></div>` : ''}
+        ${renderThumb(s.imgs, s.n, '')}
       </div>
     </div>`;
   }).join('');
@@ -811,9 +988,7 @@ DAYS.forEach((d, i) => {
 
   const opt = d.opt.length ? `<div class="opt"><span class="k">If time allows</span>
     ${d.opt.map(o => `<div class="opt-i">
-      ${o.img ? `<div class="thumb opt-thumb" data-img="${o.img}" data-cap="${o.cap || o.n}">
-        <img src="${o.img}" alt="${o.cap || o.n}" loading="lazy"
-             onerror="this.closest('.thumb').remove()"></div>` : ''}
+      ${renderThumb(o.imgs, o.n, 'opt-thumb')}
       <h5>${o.n}</h5><p>${o.p}</p>
       ${mapLink(o) ? `<div class="lnks" style="margin-top:.35rem">${mapLink(o)}</div>` : ''}
     </div>`).join('')}</div>` : '';
@@ -825,6 +1000,7 @@ DAYS.forEach((d, i) => {
         <div class="day-n">${d.num}</div>
         <div class="day-date">${d.date}</div>
         <h3>${d.title}</h3>
+        ${d.temp ? `<div class="day-temp">${d.temp.hi}° / ${d.temp.lo}°C <span class="k">avg high / low</span></div>` : ''}
         ${drive ? `<div class="day-drive">${drive.km} km · ${drive.label} driving, est.</div>` : ''}
         ${stay}
       </div>
@@ -1096,28 +1272,76 @@ document.getElementById('reset').addEventListener('click', ()=>{
 resetState(); renderLines(); compute();
 
 /* ============================================================
-   LIGHTBOX
+   LIGHTBOX + INLINE CAROUSELS
    ============================================================ */
 const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'),
-      lbCap=document.getElementById('lbCap');
-let lastFocus=null;
-document.addEventListener('click', e=>{
-  const t = e.target.closest('.thumb');
-  if(!t) return;
+      lbCap=document.getElementById('lbCap'), lbCount=document.getElementById('lbCount'),
+      lbPrev=document.getElementById('lbPrev'), lbNext=document.getElementById('lbNext');
+let lastFocus=null, lbGallery=[], lbIndex=0;
+
+/* step an inline thumb's carousel by ±1, wrapping around */
+function stepCarousel(car, dir){
+  const gallery = GALLERIES[car.dataset.gallery];
+  if(!gallery || gallery.length < 2) return;
+  let idx = (parseInt(car.dataset.idx, 10) + dir + gallery.length) % gallery.length;
+  car.dataset.idx = idx;
+  const img = car.querySelector('.car-img');
+  img.src = gallery[idx].src;
+  img.alt = gallery[idx].cap || '';
+  const count = car.querySelector('.car-count');
+  if(count) count.textContent = (idx + 1) + ' / ' + gallery.length;
+}
+
+function renderLbImage(){
+  const item = lbGallery[lbIndex];
+  lbImg.src = item.src.replace(/width=\d+/, 'width=1600');
+  lbImg.alt = item.cap || '';
+  lbCap.textContent = item.cap || '';
+  const multi = lbGallery.length > 1;
+  lbCount.textContent = multi ? (lbIndex + 1) + ' / ' + lbGallery.length : '';
+  lbPrev.style.display = multi ? '' : 'none';
+  lbNext.style.display = multi ? '' : 'none';
+}
+function stepLb(dir){
+  lbIndex = (lbIndex + dir + lbGallery.length) % lbGallery.length;
+  renderLbImage();
+}
+function openLb(gallery, startIdx){
+  lbGallery = gallery; lbIndex = startIdx || 0;
   lastFocus = document.activeElement;
-  lbImg.src = t.dataset.img.replace(/width=\d+/, 'width=1600');
-  lbImg.alt = t.dataset.cap;
-  lbCap.textContent = t.dataset.cap;
+  renderLbImage();
   lb.classList.add('open');
   document.getElementById('lbX').focus();
-});
+}
 function closeLb(){
   lb.classList.remove('open'); lbImg.src='';
   if(lastFocus) lastFocus.focus();
 }
+
+document.addEventListener('click', e=>{
+  const navBtn = e.target.closest('.car-btn');
+  if(navBtn){
+    e.stopPropagation();
+    stepCarousel(navBtn.closest('.thumb'), navBtn.classList.contains('car-next') ? 1 : -1);
+    return;
+  }
+  const t = e.target.closest('.thumb');
+  if(!t) return;
+  const gallery = GALLERIES[t.dataset.gallery];
+  if(!gallery) return;
+  openLb(gallery, parseInt(t.dataset.idx, 10) || 0);
+});
+
+lbPrev.addEventListener('click', () => stepLb(-1));
+lbNext.addEventListener('click', () => stepLb(1));
 document.getElementById('lbX').addEventListener('click', closeLb);
 lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
-window.addEventListener('keydown', e=>{ if(e.key==='Escape' && lb.classList.contains('open')) closeLb(); });
+window.addEventListener('keydown', e=>{
+  if(!lb.classList.contains('open')) return;
+  if(e.key === 'Escape') closeLb();
+  else if(e.key === 'ArrowLeft') stepLb(-1);
+  else if(e.key === 'ArrowRight') stepLb(1);
+});
 
 /* ============================================================
    SNOWFALL — three depth layers, viewport-sized
