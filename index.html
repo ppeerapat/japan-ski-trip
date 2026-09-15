@@ -396,16 +396,16 @@
   </svg>
   <div class="hero-inner">
     <span class="kanji" aria-hidden="true">雪</span>
-    <div class="hero-dates"><span>26 FEB — 07 MAR 2027</span><span class="bar"></span><span>NGO ⇄ NGO</span></div>
+    <div class="hero-dates"><span>26 FEB — 07 MAR 2027</span><span class="bar"></span><span>NRT ⇄ NRT</span></div>
     <h1>Ten Days Through<span class="ln2">Snow Country</span></h1>
     <p class="sub">A road trip from thatched mountain villages to salt-white coastline,
       quiet ski fields, and a valley of bathing monkeys.</p>
     <div class="hero-facts">
       <div><span class="n" id="fDays">10</span><span class="l">Days</span></div>
       <div><span class="n">6</span><span class="l">Prefectures</span></div>
-      <div><span class="n" id="fNights">9</span><span class="l">Nights · 6 Beds</span></div>
+      <div><span class="n" id="fNights">9</span><span class="l">Nights · 8 Beds</span></div>
       <div><span class="n" id="fKm">—</span><span class="l">km Driving, est.</span></div>
-      <div><span class="n">6</span><span class="l">Travellers</span></div>
+      <div><span class="n">8</span><span class="l">Travellers</span></div>
     </div>
   </div>
 </header>
@@ -416,9 +416,9 @@
     <div class="band-head">
       <div class="eyebrow">The Route</div>
       <h2>One long loop, anticlockwise</h2>
-      <p>Nagoya up into the Hida mountains, down to the Toyama Bay coast, east along the
-        Sea of Japan, back up into Myōkō and Nagano, then the long run south to the airport.
-        Tap a leg to trace it.</p>
+      <p>Narita across to the Hida mountains, down to the Toyama Bay coast, east along the
+        Sea of Japan, up into Myōkō for three nights, then a last stop in Kawagoe before
+        the flight home. Tap a leg to trace it.</p>
     </div>
     <div class="map-layout">
       <div class="map-frame">
@@ -546,13 +546,13 @@
           <span class="k">Travellers</span>
           <div class="step">
             <button type="button" id="pplDown" aria-label="Fewer travellers">−</button>
-            <span class="val mono" id="pplVal">6</span>
+            <span class="val mono" id="pplVal">8</span>
             <button type="button" id="pplUp" aria-label="More travellers">+</button>
           </div>
           <span class="k">Of those, skiing</span>
           <div class="step">
             <button type="button" id="skiDown" aria-label="Fewer skiers">−</button>
-            <span class="val mono" id="skiVal">6</span>
+            <span class="val mono" id="skiVal">8</span>
             <button type="button" id="skiUp" aria-label="More skiers">+</button>
           </div>
         </div>
@@ -601,7 +601,7 @@
    PLACES — real coordinates, used for the map and for map links
    ============================================================ */
 const P = {
-  ngo:   { n:"Chubu Centrair Airport",      lat:34.857362, lng:136.810756, pid:"ChIJzynM7ZN9BGARJQAsbih9mEI" },
+  nrt:   { n:"Narita International Airport",lat:35.770178, lng:140.384322, pid:"ChIJVze90XnzImARoRp3YqEpbtU" },
   sanm:  { n:"Sanmachi Suji, Takayama",     lat:36.141316, lng:137.259623, pid:"ChIJczG1tNu6AmARjrgU-Yh3zH8" },
   jinya: { n:"Takayama Jinya",              lat:36.139631, lng:137.257604, pid:"ChIJj29EXtm6AmAR4ZH1chH39Zg" },
   hida:  { n:"Hida no Sato Folk Village",   lat:36.132490, lng:137.235090, pid:"ChIJmWTYrzm7AmARRPwmwmCypNY" },
@@ -620,9 +620,7 @@ const P = {
   akski: { n:"Akakura Onsen Ski Area",      lat:36.890901, lng:138.176707, pid:"ChIJtX3mXOw99l8RnkTL9LS2KEQ" },
   sugi:  { n:"Myōkō Suginohara Ski Resort", lat:36.856923, lng:138.155070, pid:"ChIJJ8D2Bo489l8R65pouJE5Z2Q" },
   jigo:  { n:"Jigokudani Monkey Park",      lat:36.732686, lng:138.462136, pid:"ChIJzyCiTOzzHWARH9aN73OLTfY" },
-  shibu: { n:"Shibu Onsen",                 lat:36.733702, lng:138.433359, pid:"ChIJQyBBLIL0HWARtNenAnQzISA" },
-  mcas:  { n:"Matsumoto Castle",            lat:36.238653, lng:137.968867, pid:"ChIJmVmaCoUOHWARVPa8-iAOLZA" },
-  rinku: { n:"J Hotel Rinku",               lat:34.879109, lng:136.828561, pid:"ChIJ7aVdZFeHBGAR0OcWCBGX-yU" }
+  kawagoe: { n:"Kawagoe", lat:35.923476, lng:139.483335, pid:"ChIJrbCsQWHaGGARYf8yVWFvO7k" }
 };
 
 /* Google Maps link — prefers the exact place, falls back to a name search */
@@ -671,30 +669,26 @@ function legStats(keys, overrideKm){
 /* ci / co: NONE of these are confirmed. They are the standard defaults for each
    property type in Japan. Verify against your booking and correct here. */
 const STAYS = {
-  "Hidasumika Machiya Sakurayama": { price:2248.33, nights:2, meals:null,
+  "Hidasumika Machiya Sakurayama": { price:3750.00, nights:2, meals:null,
     ci:"15:00", co:"10:00", assumed:true,
     link:"https://www.booking.com/hotel/jp/hidasumika-machiya-sakurayama.en-gb.html",
     q:"Hidasumika Machiya Sakurayama Takayama" },
-  "Super Hotel Toyama Premier": { price:1407.50, nights:1, meals:"Breakfast",
+  "Super Hotel Toyama Premier": { price:1700.00, nights:1, meals:"Breakfast",
     ci:"15:00", co:"10:00", assumed:true,
     link:"https://www.toyamashi-kankoukyoukai.jp/en/stay/super-hotel-premier-toyama-castle-park-front/",
     q:"Super Hotel Premier Toyama Castle Park Front" },
-  "Ocean View House, Asahi": { price:2729.67, nights:2, meals:null,
+  "Ocean View House, Asahi": { price:2000.00, nights:2, meals:null,
     ci:"16:00", co:"10:00", assumed:true,
     link:"https://www.airbnb.com/rooms/1334443653214454778",
     q:"Asahi Toyama" },
   // NOTE: this link was a duplicate of Ocean View House in the previous draft.
   // Replace with the real Myōkō listing URL.
-  "170㎡ Myōkō House": { price:4040.83, nights:2, meals:null,
+  "170㎡ Myōkō House": { price:4625.00, nights:3, meals:null,
     ci:"16:00", co:"10:00", assumed:true,
     link:null, q:"Akakura Onsen Myoko" },
-  "Hotel Housei, Shibu Onsen": { price:2678.83, nights:1, meals:"Breakfast + dinner",
-    ci:"15:00", co:"10:00", assumed:true,
-    link:"https://www.snowmonkeyresorts.com/hotels/hotel-housei/",
-    q:"Hotel Housei Shibu Onsen" },
-  "J Hotel Rinku": { price:1500.00, nights:1, meals:null,
-    ci:"15:00", co:"12:00", assumed:true,
-    link:null, pkey:"rinku", q:"J Hotel Rinku Tokoname" }
+  "Kawagoe Koedo Stay": { price:1500.00, nights:1, meals:null,
+    ci:"16:00", co:"11:00", assumed:true,
+    link:"https://www.airbnb.com/rooms/45960137", pkey:"kawagoe", q:"Kawagoe Koedo Airbnb" }
 };
 
 /* ============================================================
@@ -702,13 +696,13 @@ const STAYS = {
    ============================================================ */
 const DAYS = [
 {
-  num:"01", date:"26 Feb · Fri", title:"Arrive Nagoya, drive to Takayama", temp:{hi:8, lo:-2},
-  stay:"Hidasumika Machiya Sakurayama", route:["ngo","sanm"], ciBefore:"Takayama Old Town",
+  num:"01", date:"26 Feb · Fri", title:"Arrive Narita, the long drive to Takayama", temp:{hi:8, lo:-2},
+  stay:"Hidasumika Machiya Sakurayama", route:["nrt","sanm"], ciBefore:"Takayama Old Town",
   stops:[
-    { t:"10:30", n:"Land at Centrair (XJ638)", p:"Clear customs, pick up the rental car, head north.", m:"ngo" },
-    { t:"12:00", n:"North into the Hida mountains", p:"Roughly two and a half hours up from the coast plain." },
-    { t:"13:00", n:"Lunch", meal:true, p:"Hida beef curry, or a bento from a Gifu expressway service area." },
-    { t:"15:30", n:"Takayama Old Town", p:"Edo-period lanes, sake breweries, an evening walk before the cold sets in.", m:"sanm",
+    { t:"08:05", n:"Land at Narita (NH808)", p:"Clear customs, pick up the rental car, then the long push west.", m:"nrt" },
+    { t:"09:30", n:"On the road to Takayama", p:"It's a big first day — roughly six hours, mostly the Ken-O and Chuo expressways skirting Tokyo before turning north into Gifu." },
+    { t:"12:00", n:"Lunch", meal:true, p:"A service-area stop en route; save the real Hida beef curry for tonight." },
+    { t:"16:30", n:"Takayama Old Town", p:"Edo-period lanes, sake breweries, an evening walk before the cold sets in.", m:"sanm",
       imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Takayama%27s_Early_Winter_Welcome_%28NE%29.jpg?width=700",cap:"Takayama Old Town in early winter"},
         {src:"https://cdn.visitgifu.com/wp/2020/03/7008d718-pagemain_pc_m_traveltogifu.jpg",cap:"Takayama Old Town"},
         {src:"https://cdn.visitgifu.com/wp/2020/03/869e29b5-20180907takayama_sannomachi2-1290x793.jpg",cap:"Sanmachi Suji street"},
@@ -805,7 +799,7 @@ const DAYS = [
         {src:"https://www.umigatari.jp/image/202412en_07.jpg",cap:"Jōetsu Aquarium Umigatari"},
         {src:"https://www.umigatari.jp/image/202412en_03.jpg",cap:"Jōetsu Aquarium Umigatari"}] },
     { t:"12:30", n:"Lunch", meal:true, p:"Jōetsu seafood, or local soba on the way out of town." },
-    { t:"13:30", n:"Climb to Myōkō", p:"Off the coast and into the mountains for two nights.", m:"akak",
+    { t:"13:30", n:"Climb to Myōkō", p:"Off the coast and into the mountains for three nights.", m:"akak",
       imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Mt_Myoko_-_panoramio.jpg?width=700",cap:"Mount Myōkō"},
         {src:"https://www.powderhounds.com/site/DefaultSite/filesystem/images/Japan/MyokoKogen/Overview/01.jpg",cap:"Myōkō Kogen"},
         {src:"https://travel.rakuten.com/contents/sites/contents/files/styles/max_1300x1300/public/2023-11/ski-resort-myoko-kogen_7.jpg?itok=pXUpvsmv",cap:"Myōkō Kogen ski resort"}] },
@@ -830,42 +824,47 @@ const DAYS = [
   ]
 },
 {
-  num:"08", date:"5 Mar · Fri", title:"Myōkō to Shibu Onsen, via the monkeys", temp:{hi:8, lo:-2},
-  stay:"Hotel Housei, Shibu Onsen", route:["akak","jigo","shibu"], roadKm:75,
+  num:"08", date:"5 Mar · Fri", title:"A second day in Myōkō", temp:{hi:8, lo:-2},
+  stay:"170㎡ Myōkō House", route:[],
   stops:[
-    { t:"08:00", n:"Leave the Myōkō house", p:"Check out and head east. The direct mountain road is shut in winter, so it's a loop round on the Jōshin-etsu expressway via Shinshū-Nakano — closer to an hour and a half than the map suggests.", m:"akak" },
-    { t:"09:30", n:"Jigokudani Monkey Park", p:"Wild macaques in their own hot spring. It's a 1.6 km walk in from the car park — packed snow and ice the whole way, so bring grips.", m:"jigo",
-      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Snow_Monkeys,_Nagano,_Japan.JPG?width=700",cap:"Jigokudani Monkey Park"}] },
-    { t:"12:30", n:"Lunch", meal:true, p:"Nagano soba around Yudanaka, five minutes back down the hill from the park." },
-    { t:"14:30", n:"Shibu Onsen", p:"Ten minutes on from the park. Lantern-lit hot spring town of nine public bathhouses — check in, change into a yukata.", m:"shibu",
-      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Shibu_Onsen.jpg?width=700",cap:"Shibu Onsen"},
-        {src:"https://images.trvl-media.com/place/3000757325/1665ccdd-5f63-4567-8e7a-8aa15a93e787.jpg",cap:"Shibu Onsen"},
-        {src:"https://japanspecialist.com/o/adaptive-media/image/3833571/large/1_Shibu+Onsen.jpg?t=1756118455125",cap:"Shibu Onsen"},
-        {src:"https://eijfa9g4ivj.exactdn.com/wp-content/uploads/2024/07/shibu-onsen-65-1024x779.jpg?strip=all",cap:"Shibu Onsen"}] },
-    { t:"19:00", n:"Dinner", meal:true, p:"Included at Hotel Housei — a kaiseki-style ryokan dinner." }
+    { t:"08:30", n:"Myōkō Suginohara instead", p:"Fifteen minutes south of Akakura. One gondola, almost no lift queues, and an 8.5 km top-to-bottom run — the longest in Japan.", m:"sugi",
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Myoko_Suginohara_Ski_Resort_-_Jan_13,_2014_%281%29.jpg?width=500",cap:"Myōkō Suginohara, January"}] },
+    { t:"12:30", n:"Lunch", meal:true, p:"On the mountain, or back in Akakura village." },
+    { t:"15:30", n:"Onsen and a slow afternoon", p:"No packing today — a last easy soak and a wander round the village before the long drive east tomorrow.", m:"akak" },
+    { t:"19:00", n:"Dinner", meal:true, p:"Home cooking at the house, or a local izakaya for a last night out in Myōkō." }
   ],
-  opt:[{ n:"The nine-bathhouse stamp rally", p:"Shibu's tradition: tour all nine public baths in yukata in one evening. Guests of the ryokan get the key to all nine." }]
+  opt:[
+    { n:"Back to Akakura instead", p:"Familiar terrain from day one — same lift pass, no need to relearn the mountain, and a good pick if anyone's still working up to the steeper runs.", m:"akski" },
+    { n:"Skip the skiing entirely", p:"A full slow day of onsen-hopping and cafés around Myōkō village instead." }
+  ]
 },
 {
-  num:"09", date:"6 Mar · Sat", title:"Matsumoto, then the long run south", temp:{hi:11, lo:1},
-  stay:"J Hotel Rinku", route:["shibu","mcas","rinku"], roadKm:390,
+  num:"09", date:"6 Mar · Sat", title:"Myōkō to Kawagoe, via the snow monkeys", temp:{hi:11, lo:1},
+  stay:"Kawagoe Koedo Stay", route:["akak","jigo","kawagoe"],
   heavy:true,
   stops:[
-    { t:"09:00", n:"Leave Shibu", p:"Highway south toward Matsumoto." },
-    { t:"10:00", n:"Matsumoto Castle", p:"One of Japan's twelve original keeps — black-walled, moated, and genuinely old inside.", m:"mcas",
-      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/MatsumotoCastle.jpg?width=700",cap:"Matsumoto Castle"}] },
-    { t:"12:30", n:"Lunch", meal:true, p:"Shinshū soba near the castle." },
-    { t:"14:00", n:"South to Rinku", p:"The longest single drive of the trip. J Hotel Rinku is one train stop from the terminal, with an Aeon Mall next door.", m:"rinku" },
-    { t:"19:00", n:"Dinner", meal:true, p:"Something easy at the mall next door — a last casual meal before flying." }
+    { t:"08:00", n:"Leave the Myōkō house", p:"Check out and head south. The direct mountain road is shut in winter, so it's a loop round on the Jōshin-etsu expressway via Shinshū-Nakano — closer to forty minutes than the map suggests.", m:"akak" },
+    { t:"09:00", n:"Jigokudani Monkey Park", p:"Wild macaques in their own hot spring. It's a 1.6 km walk in from the car park — packed snow and ice the whole way, so bring grips.", m:"jigo",
+      imgs:[{src:"https://commons.wikimedia.org/wiki/Special:FilePath/Snow_Monkeys,_Nagano,_Japan.JPG?width=700",cap:"Jigokudani Monkey Park"}] },
+    { t:"12:30", n:"Lunch", meal:true, p:"Nagano soba around Yudanaka, five minutes back down the hill from the park." },
+    { t:"14:00", n:"East to Kawagoe", p:"The longest single drive of the trip — down out of the mountains and across to Saitama, mostly on the Jōshin-etsu and Kan-etsu expressways.", m:"kawagoe" },
+    { t:"17:00", n:"Check in, Koedo Kawagoe", p:"An 11-minute walk from the station, in the thick of the old warehouse town — good access for the evening on foot.",
+      imgs:[{src:"https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NDU5NjAxMzc%3D/original/a38ccfc0-0a1a-4e6f-8a26-b4cea98c879f.jpeg",cap:"The Kawagoe stay"}] },
+    { t:"18:30", n:"Toki no Kane and Kurazukuri Street", p:"Kawagoe's lantern-lit warehouse district — the bell tower rings on the hour, and Kashiya Yokocho's candy alley is a few steps off the main street.",
+      imgs:[{src:"https://a3.cdn.japantravel.com/photo/37774-171757/1440x960%21/saitama-warehouse-district-of-kawagoe-171757.webp",cap:"Kurazukuri warehouse street, Kawagoe"},
+        {src:"https://a3.cdn.japantravel.com/photo/37774-171758/360x240%21/saitama-warehouse-district-of-kawagoe-171758.webp",cap:"Kawagoe warehouse district"}] },
+    { t:"19:30", n:"Dinner", meal:true, p:"Something local in the old town — a last proper dinner before flying tomorrow." }
   ],
-  opt:[{ n:"Nakamachi merchant street", p:"Matsumoto's white-walled kura warehouse district. Good coffee, slow wander." }]
+  opt:[{ n:"Kashiya Yokocho", p:"Candy Alley — old-fashioned sweet shops making treats by hand, popular since the 1930s." }]
 },
 {
-  num:"10", date:"7 Mar · Sun", title:"Return the car, fly home", temp:{hi:13, lo:3},
-  stay:null, route:[],
+  num:"10", date:"7 Mar · Sun", title:"Kawagoe morning, fly home", temp:{hi:13, lo:3},
+  stay:null, route:["kawagoe","nrt"],
   stops:[
-    { t:"08:00", n:"Drop the rental car", p:"Ten minutes from Rinku to the return desk at Centrair.", m:"ngo" },
-    { t:"10:30", n:"XJ639 — wheels up", p:"Ten days, six prefectures, a great deal of snow." }
+    { t:"09:00", n:"Last morning in Kawagoe", p:"Kita-in Temple's 500 rakan statues, or another pass along Kurazukuri Street — checkout is 11:00, strictly." },
+    { t:"11:00", n:"East to Narita", p:"Under two hours on the Ken-O Expressway, skirting round Tokyo." },
+    { t:"13:30", n:"Drop the rental car", p:"Return desk at Narita, then time to spare before the flight — Naritasan Shinshoji Temple is an easy option if there's energy left.", m:"nrt" },
+    { t:"18:55", n:"NH805 — wheels up", p:"Ten days, six prefectures, a great deal of snow." }
   ],
   opt:[]
 }
@@ -1064,7 +1063,7 @@ DAYS.forEach((d, i) => {
   });
 
   /* markers — dedupe, note which are overnight stops */
-  const sleepKeys = new Set(['sanm','kansui','asahi','akak','shibu','ngo']);
+  const sleepKeys = new Set(['sanm','kansui','asahi','akak','kawagoe','nrt']);
   const seen = new Set();
   DAYS.forEach(d=>d.route.forEach(k=>{
     if(seen.has(k)) return;
@@ -1150,26 +1149,26 @@ const SKI_DAYS  = 2;
    per:  'person' = each traveller pays it | 'group' = split across the group
    unit: 'total'  = the figure is the whole cost | 'day' = figure is per day, ×mult */
 const DEFAULTS = [
-  { id:'flight', nm:'Flights',       sb:'AirAsia X, Bangkok ⇄ Nagoya, economy, return',
-    v:15600, per:'person', unit:'total', mult:1 },
-  { id:'accom',  nm:'Accommodation', sb:'6 bookings, 9 nights, already priced per person',
+  { id:'flight', nm:'Flights',       sb:'ANA, Bangkok ⇄ Tokyo Narita, economy, return',
+    v:19000, per:'person', unit:'total', mult:1 },
+  { id:'accom',  nm:'Accommodation', sb:'5 bookings, 9 nights, already priced per person',
     v:Math.round(ACCOM), per:'person', unit:'total', mult:1 },
-  { id:'car',    nm:'Car rental',    sb:'10-day minivan, winter tyres',
-    v:36900, per:'group', unit:'total', mult:1 },
-  { id:'fuel',   nm:'Fuel & tolls',  sb:'Full loop, expressway tolls included',
-    v:7176, per:'group', unit:'total', mult:1 },
+  { id:'car',    nm:'Car rental',    sb:'10-day, 2 minivans, winter tyres',
+    v:60000, per:'group', unit:'total', mult:1 },
+  { id:'fuel',   nm:'Fuel & tolls',  sb:'Full loop, 2 cars, expressway tolls included',
+    v:14352, per:'group', unit:'total', mult:1 },
   { id:'ski',    nm:'Ski rental',    sb:`Gear and lift pass — Seaside Valley (D5) and Akakura (D7)`,
     v:2460, per:'person', unit:'day', mult:SKI_DAYS, skiOnly:true },
   { id:'food',   nm:'Food & drink',  sb:'Casual to mid-range, two ryokan meals already included',
     v:720, per:'person', unit:'day', mult:TRIP_DAYS }
 ];
 
-let state, ppl = 6, skiers = 6;
+let state, ppl = 8, skiers = 8;
 
 function resetState(){
   state = {};
   DEFAULTS.forEach(l => state[l.id] = l.v);
-  ppl = 6; skiers = 6;
+  ppl = 8; skiers = 8;
 }
 
 function fmt(n){ return '฿' + Math.round(n).toLocaleString('en-US'); }
